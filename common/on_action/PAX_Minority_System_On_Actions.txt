@@ -1,0 +1,24 @@
+﻿on_game_start_minorities_setup = {
+	effect = {
+		every_county = {
+			save_scope_as = current_county
+
+			add_to_variable_list = {
+				name = cultural_minorities_list
+				target = this.culture
+			}
+			add_to_variable_list = {
+				name = "[GetPlayer.GetCulture.GetName]_test_name"
+				target = this.faith
+			}
+			add_to_variable_list = {
+				name = cultural_percentage_minorities_list
+				target = 60.0
+			}
+			add_to_variable_list = {
+				name = faith_percentage_minorities_list
+				target = 60.0
+			}
+		}
+	}
+}

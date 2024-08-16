@@ -5,5 +5,5 @@ tags={
 	"Gameplay"
 	"Decisions"
 }
-name="Pax Romana Minory System"
+name="Pax Romana Minority System"
 supported_version="1.12.5"

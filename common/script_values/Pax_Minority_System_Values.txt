@@ -1,0 +1,9 @@
+﻿average_second_section_cultural_percentage_add = {
+	value = 40.0
+	divide = var:total_second_section_cultural_minorities_list
+}
+
+average_second_section_faith_percentage_add = {
+	value = 40.0
+	divide = var:total_second_section_faith_minorities_list
+}
