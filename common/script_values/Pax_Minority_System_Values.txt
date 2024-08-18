@@ -1,9 +1,17 @@
-﻿average_second_section_cultural_percentage_add = {
+﻿average_second_section_percentage_add = {
 	value = 40.0
-	divide = var:total_second_section_cultural_minorities_list
+	if = {
+		limit = { var.counter > 0 }
+
+		divide = var:counter
+	}
 }
 
-average_second_section_faith_percentage_add = {
-	value = 40.0
-	divide = var:total_second_section_faith_minorities_list
+corrected_percentage_value_calculation = {
+	value = var:percentage_amount
+	if = {
+		limit = { var:repeting = 0 }
+		error_log = "repeting variable is set to 0! This hould not be happening!"
+	}
+	multiply = var:repeting
 }

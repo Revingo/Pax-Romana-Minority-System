@@ -3,21 +3,158 @@
 		every_county = {
 			save_scope_as = current_county
 
-			add_to_variable_list = {
-				name = cultural_minorities_list
-				target = this.culture
+			culture_story_cycle_create = {
+				COUNTY = scope:current_county
+				CULTURE = scope:current_county.culture
+				AMOUNT = 60.0
 			}
-			add_to_variable_list = {
-				name = "[GetPlayer.GetCulture.GetName]_test_name"
-				target = this.faith
+
+			faith_story_cycle_create = {
+				COUNTY = scope:current_county
+				FAITH = scope:current_county.faith
+				AMOUNT = 60.0
 			}
-			add_to_variable_list = {
-				name = cultural_percentage_minorities_list
-				target = 60.0
+
+			set_variable = {
+				name = counter
+				value = 0
 			}
-			add_to_variable_list = {
-				name = faith_percentage_minorities_list
-				target = 60.0
+
+			every_neighboring_county = {
+				save_scope_as = neighboring_county
+
+				prev = {
+					change_variable = {
+						name = counter
+						add = 1
+					}
+
+					add_to_variable_list = {
+						name = to_add_cultures
+						target = scope:neighboring_county.culture
+					}
+
+					add_to_variable_list = {
+						name = to_add_faiths
+						target = scope:neighboring_county.faith
+					}
+				}
+			}
+
+			set_variable = {
+				name = percentage_amount
+				value = average_second_section_percentage_add
+			}
+
+			every_in_list = {
+				variable = to_add_cultures
+
+				save_scope_as = this_culture
+
+				scope:current_county = {
+
+					set_variable = {
+						name = repeting
+						value = 0
+					}
+
+					every_neighboring_county = {
+						save_scope_as = neighboring_county
+
+						limit = { scope:this_culture = culture }
+
+						scope:current_county = {
+							change_variable = {
+								name = repeting
+								add = 1
+							}
+						}
+					}
+
+					set_variable = {
+						name = corrected_percentage_amount
+						value = corrected_percentage_value_calculation
+					}
+
+					remove_variable = repeting
+				}
+
+				START_GAME_culture_story_cycle_create = {
+					COUNTY = scope:current_county
+					CULTURE = scope:this_culture
+					AMOUNT = scope:current_county.var:corrected_percentage_amount
+				}
+
+				scope:current_county = {
+					remove_variable = corrected_percentage_amount
+				}
+			}
+
+			every_in_list = {
+				variable = to_add_faiths
+
+				save_scope_as = this_faith
+
+				scope:current_county = {
+
+					set_variable = {
+						name = repeting
+						value = 0
+					}
+
+					every_neighboring_county = {
+						save_scope_as = neighboring_county
+
+						limit = { scope:this_faith = faith }
+
+						scope:current_county = {
+							change_variable = {
+								name = repeting
+								add = 1
+							}
+						}
+					}
+
+					set_variable = {
+						name = corrected_percentage_amount
+						value = corrected_percentage_value_calculation
+					}
+
+					remove_variable = repeting
+				}
+
+				START_GAME_faith_story_cycle_create = {
+					COUNTY = scope:current_county
+					FAITH = scope:this_faith
+					AMOUNT = scope:current_county.var:corrected_percentage_amount
+				}
+
+				scope:current_county = {
+					remove_variable = corrected_percentage_amount
+				}
+			}
+
+			#remove_variable = counter
+
+			#remove_variable = percentage_amount
+
+			#clear_variable_list = to_add_cultures
+
+			#clear_variable_list = to_add_faiths
+		}
+	}
+}
+
+
+test_on_action_minority = {
+	effect = {
+		every_county = {
+			save_scope_as = current_county
+
+			culture_story_cycle_create = {
+				COUNTY = scope:current_county
+				CULTURE = scope:current_county.culture
+				AMOUNT = 60.0
 			}
 		}
 	}

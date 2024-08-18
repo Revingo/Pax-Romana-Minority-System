@@ -1,5 +1,6 @@
-﻿on_game_start = {
+﻿on_game_start_after_lobby = {
 	on_actions = {
 		on_game_start_minorities_setup
+		#test_on_action_minority
 	}
 }

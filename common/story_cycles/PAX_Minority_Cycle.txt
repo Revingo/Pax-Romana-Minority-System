@@ -1,0 +1,12 @@
+﻿minority_system_story_cycle = {
+	on_setup = {
+	}
+
+	on_end = {
+
+	}
+
+	on_owner_death = {
+		
+	}
+}

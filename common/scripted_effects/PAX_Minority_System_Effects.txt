@@ -1,0 +1,185 @@
+﻿culture_story_cycle_create = {
+	random_player = {
+
+		create_story = {
+			type = minority_system_story_cycle
+			save_scope_as = new_culture_story_cycle	
+		}
+
+		scope:new_culture_story_cycle = {
+			set_variable = {
+				name = culture
+				value = $CULTURE$
+			}
+	
+			set_variable = {
+				name = amount
+				value = $AMOUNT$
+			}
+		}
+
+		$COUNTY$ = {
+			add_to_variable_list = {
+				name = culture_minorities
+				target = scope:new_culture_story_cycle
+			}
+		}
+	}
+}
+
+faith_story_cycle_create = {
+	random_player = {
+
+		create_story = {
+			type = minority_system_story_cycle
+			save_scope_as = new_faith_story_cycle	
+		}
+
+		scope:new_faith_story_cycle = {
+			set_variable = {
+				name = faith
+				value = $FAITH$
+			}
+	
+			set_variable = {
+				name = amount
+				value = $AMOUNT$
+			}
+		}
+
+		$COUNTY$ = {
+			add_to_variable_list = {
+				name = faith_minorities
+				target = scope:new_faith_story_cycle
+			}
+		}
+	}
+}
+
+change_value_of_culture_in_list = {
+	#$COUNTY$ = {
+		every_in_list = {
+			variable = culture_minorities
+
+			limit = {
+				this.var:culture = $CULTURE$
+			}
+
+			change_variable = {
+				name = amount
+				add = $AMOUNT$
+			}
+		}
+	#}
+}
+
+change_value_of_faith_in_list = {
+	#$COUNTY$ = {
+		every_in_list = {
+			variable = faith_minorities
+
+			limit = {
+				this.var:faith = $FAITH$
+			}
+
+			change_variable = {
+				name = amount
+				add = $AMOUNT$
+			}
+		}
+	#}
+}
+
+remove_culture_in_list = {
+	$COUNTY$ = {
+		every_in_list = {
+			variable = culture_minorities
+
+			limit = {
+				this.var:culture = $CULTURE$
+			}
+
+			save_scope_as = to_remove_story_cycle
+
+			prev = {
+				remove_list_variable = {
+					name = culture_minorities
+					target = scope:to_remove_story_cycle
+				}
+			}
+		}
+	}
+}
+
+remove_faith_in_list = {
+	$COUNTY$ = {
+		every_in_list = {
+			variable = faith_minorities
+
+			limit = {
+				this.var:faith = $FAITH$
+			}
+
+			save_scope_as = to_remove_story_cycle
+
+			prev = {
+				remove_list_variable = {
+					name = faith_minorities
+					target = scope:to_remove_story_cycle
+				}
+			}
+		}
+	}
+}
+
+START_GAME_culture_story_cycle_create = {
+	$COUNTY$ = {
+		if = {
+			limit = {
+				culture_is_already_in_list = {
+					#COUNTY = $COUNTY$
+					CULTURE = $CULTURE$
+				}
+			}
+
+			change_value_of_culture_in_list = {
+				#COUNTY = $COUNTY$
+				CULTURE = $CULTURE$
+				AMOUNT = $AMOUNT$
+			}
+		}
+		else = {
+			culture_story_cycle_create = {
+				COUNTY = $COUNTY$
+				CULTURE = $CULTURE$
+				AMOUNT = $AMOUNT$
+			}
+		}
+	}
+}
+
+START_GAME_faith_story_cycle_create = {
+	$COUNTY$ = {
+		if = {
+			limit = {
+				faith_is_already_in_list = {
+					#COUNTY = $COUNTY$
+					FAITH = $FAITH$
+				}
+			}
+
+			change_value_of_faith_in_list = {
+				#COUNTY = $COUNTY$
+				FAITH = $FAITH$
+				AMOUNT = $AMOUNT$
+			}
+		}
+		else = {
+			faith_story_cycle_create = {
+				COUNTY = $COUNTY$
+				FAITH = $FAITH$
+				AMOUNT = $AMOUNT$
+			}
+		}
+	}
+}
