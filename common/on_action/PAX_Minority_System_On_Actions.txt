@@ -41,10 +41,22 @@
 				}
 			}
 
-			set_variable = {
-				name = percentage_amount
-				value = average_second_section_percentage_add
+			if = {
+				limit = { var:counter > 0 }
+
+				set_variable = {
+					name = percentage_amount
+					value = average_second_section_percentage_add
+				}
 			}
+			else = {
+				set_variable = {
+					name = percentage_amount
+					value = 40
+				}
+			}
+
+			
 
 			every_in_list = {
 				variable = to_add_cultures
@@ -134,17 +146,41 @@
 				}
 			}
 
+			fix_faith_list = yes
+
+			fix_culture_list = yes
+
 			#remove_variable = counter
 
 			#remove_variable = percentage_amount
 
-			#clear_variable_list = to_add_cultures
+			clear_variable_list = to_add_cultures
 
-			#clear_variable_list = to_add_faiths
+			clear_variable_list = to_add_faiths
+
+			clever_culture_add = {
+				CULTURE = scope:current_county.holder.culture
+				AMOUNT = 5.00
+			}
+
+			clever_faith_add = {
+				FAITH = scope:current_county.holder.faith
+				AMOUNT = 5.00
+			}
 		}
 	}
 }
 
+on_new_culture_minority_system = {
+	effect = {
+		every_culture_county = {
+			clever_culture_add = {
+				CULTURE = scope:root
+				AMOUNT = 50
+			}
+		}
+	}
+}
 
 test_on_action_minority = {
 	effect = {

@@ -1,17 +1,10 @@
 ﻿average_second_section_percentage_add = {
 	value = 40.0
-	if = {
-		limit = { var.counter > 0 }
+	divide = var:counter
 
-		divide = var:counter
-	}
 }
 
 corrected_percentage_value_calculation = {
 	value = var:percentage_amount
-	if = {
-		limit = { var:repeting = 0 }
-		error_log = "repeting variable is set to 0! This hould not be happening!"
-	}
 	multiply = var:repeting
 }

@@ -1,4 +1,4 @@
-culture_is_already_in_list = {
+﻿culture_is_already_in_list = {
 	#$COUNTY$ = {
 		any_in_list = {
 			variable = culture_minorities

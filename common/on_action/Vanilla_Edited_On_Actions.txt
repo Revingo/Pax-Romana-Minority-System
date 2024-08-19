@@ -4,3 +4,9 @@
 		#test_on_action_minority
 	}
 }
+
+on_culture_created = {
+	on_actions = {
+		on_new_culture_minority_system
+	}
+}

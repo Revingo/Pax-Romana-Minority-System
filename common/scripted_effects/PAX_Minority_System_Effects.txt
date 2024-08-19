@@ -183,3 +183,347 @@ START_GAME_faith_story_cycle_create = {
 		}
 	}
 }
+
+fix_culture_list = {
+	save_scope_as = county_to_fix
+
+	set_variable = {
+		name = total_to_add
+		value = 100.0
+	}
+
+	every_in_list = {
+		variable = culture_minorities
+
+		save_scope_as = current_story_cycle
+
+		scope:county_to_fix = {
+			change_variable = {
+				name = total_to_add
+				subtract = scope:current_story_cycle.var:amount
+			}
+		}
+	}
+
+	random_in_list = {
+		variable = culture_minorities
+
+		change_variable = {
+			name = amount
+			add = scope:county_to_fix.var:total_to_add
+		}
+	}
+
+	remove_variable = total_to_add
+
+	every_in_list = {
+		variable = culture_minorities
+
+		save_scope_as = small_minority
+
+		limit = { var:amount < 1}
+
+		random_in_list = {
+			variable = culture_minorities
+
+			limit = { NOT = { scope:small_minority.var:culture = var:culture } }
+
+			change_variable = {
+				name = amount
+				add = scope:small_minority.var:amount
+			}
+		}
+
+		scope:county_to_fix = {
+			add_to_variable_list = {
+				name = small_minorities
+				target = scope:small_minority
+			}
+		}
+	}
+
+	if = {
+		limit = { has_variable_list = small_minorities }
+
+		every_in_list = {
+			variable = small_minorities
+
+			save_scope_as = to_remove
+
+			scope:county_to_fix = {
+				remove_list_variable = {
+					name = culture_minorities
+					target = scope:to_remove
+				}
+			}
+		}
+
+		clear_variable_list = small_minorities
+	}
+}
+
+fix_faith_list = {
+	save_scope_as = county_to_fix
+
+	set_variable = {
+		name = total_to_add
+		value = 100.00
+	}
+
+	every_in_list = {
+		variable = faith_minorities
+
+		save_scope_as = current_story_cycle
+
+		scope:county_to_fix = {
+			change_variable = {
+				name = total_to_add
+				subtract = scope:current_story_cycle.var:amount
+			}
+		}
+	}
+
+	random_in_list = {
+		variable = faith_minorities
+
+		change_variable = {
+			name = amount
+			add = scope:county_to_fix.var:total_to_add
+		}
+	}
+
+	remove_variable = total_to_add
+
+	every_in_list = {
+		variable = faith_minorities
+
+		save_scope_as = small_minority
+
+		limit = { var:amount < 1}
+
+		random_in_list = {
+			variable = faith_minorities
+
+			limit = { NOT = { scope:small_minority.var:faith = var:faith } }
+
+			change_variable = {
+				name = amount
+				add = scope:small_minority.var:amount
+			}
+		}
+
+		scope:county_to_fix = {
+			add_to_variable_list = {
+				name = small_minorities
+				target = scope:small_minority
+			}
+		}
+	}
+
+	if = {
+		limit = { has_variable_list = small_minorities }
+
+		every_in_list = {
+			variable = small_minorities
+
+			save_scope_as = to_remove
+
+			scope:county_to_fix = {
+				remove_list_variable = {
+					name = faith_minorities
+					target = scope:to_remove
+				}
+			}
+		}
+
+		clear_variable_list = small_minorities
+	}
+}
+
+clever_culture_add = {
+	save_scope_as = county_add
+
+	set_variable = {
+		name = clever_counter
+		value = 0
+	}
+
+	every_in_list = {
+		variable = culture_minorities
+
+		scope:county_add = {
+			change_variable = {
+				name = clever_counter
+				add = 1
+			}
+		}
+	}
+
+	set_variable = {
+		name = clever_subtract
+		value = {
+			value = $AMOUNT$
+			divide = var:clever_counter
+		}
+	}
+
+	if = {
+		limit = {
+			AND = {
+				culture_is_already_in_list = {
+					#COUNTY = $COUNTY$
+					CULTURE = $CULTURE$
+				}
+
+				var:clever_counter > 1
+			}
+			
+		}
+
+		change_value_of_culture_in_list = {
+			#COUNTY = $COUNTY$
+			CULTURE = $CULTURE$
+			AMOUNT = $AMOUNT$
+		}
+
+		every_in_list = {
+			variable = culture_minorities
+	
+			limit = { NOT = { var:culture = $CULTURE$ } }
+	
+			change_variable = {
+				name = amount
+				subtract = scope:county_add.var:clever_subtract
+			}
+		}
+	}
+	else_if = {
+
+		limit = {
+			NOT = {
+				culture_is_already_in_list = {
+					#COUNTY = $COUNTY$
+					CULTURE = $CULTURE$
+				}
+			}
+		}
+
+		culture_story_cycle_create = {
+			COUNTY = scope:county_add
+			CULTURE = $CULTURE$
+			AMOUNT = $AMOUNT$
+		}
+
+		every_in_list = {
+			variable = culture_minorities
+	
+			limit = { NOT = { var:culture = $CULTURE$ } }
+	
+			change_variable = {
+				name = amount
+				subtract = scope:county_add.var:clever_subtract
+			}
+		}
+	}
+
+	fix_faith_list = yes
+
+	fix_culture_list = yes
+
+	remove_variable = clever_counter
+
+	remove_variable = clever_subtract
+}
+
+clever_faith_add = {
+	save_scope_as = county_add
+
+	set_variable = {
+		name = clever_counter
+		value = 0
+	}
+
+	every_in_list = {
+		variable = faith_minorities
+
+		scope:county_add = {
+			change_variable = {
+				name = clever_counter
+				add = 1
+			}
+		}
+	}
+
+	set_variable = {
+		name = clever_subtract
+		value = {
+			value = $AMOUNT$
+			divide = var:clever_counter
+		}
+	}
+
+	if = {
+		limit = {
+			AND = {
+				faith_is_already_in_list = {
+					#COUNTY = $COUNTY$
+					FAITH = $FAITH$
+				}
+
+				var:clever_counter > 1
+			}
+		}
+
+		change_value_of_faith_in_list = {
+			#COUNTY = $COUNTY$
+			FAITH = $FAITH$
+			AMOUNT = $AMOUNT$
+		}
+
+		every_in_list = {
+			variable = faith_minorities
+	
+			limit = { NOT = { var:faith = $FAITH$ } }
+	
+			change_variable = {
+				name = amount
+				subtract = scope:county_add.var:clever_subtract
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			NOT = {
+				faith_is_already_in_list = {
+					#COUNTY = $COUNTY$
+					FAITH = $FAITH$
+				}
+			}
+		}
+
+		faith_story_cycle_create = {
+			COUNTY = scope:county_add
+			FAITH = $FAITH$
+			AMOUNT = $AMOUNT$
+		}
+
+		every_in_list = {
+			variable = faith_minorities
+	
+			limit = { NOT = { var:faith = $FAITH$ } }
+	
+			change_variable = {
+				name = amount
+				subtract = scope:county_add.var:clever_subtract
+			}
+		}
+	}
+
+	fix_faith_list = yes
+
+	fix_culture_list = yes
+
+	remove_variable = clever_counter
+
+	remove_variable = clever_subtract
+}
