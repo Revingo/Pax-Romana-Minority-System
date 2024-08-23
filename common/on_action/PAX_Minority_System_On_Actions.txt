@@ -173,9 +173,38 @@
 
 on_new_culture_minority_system = {
 	effect = {
+		save_scope_as = new_culture
 		every_culture_county = {
 			clever_culture_add = {
-				CULTURE = scope:root
+				CULTURE = scope:new_culture
+				AMOUNT = 50
+			}
+		}
+	}
+}
+
+on_new_faith_minority_system = {
+	effect = {
+		faith = {
+			save_scope_as = new_faith
+
+			every_county = {
+				limit = { this.faith = scope:new_faith }
+	
+				clever_faith_add = {
+					FAITH = scope:new_faith
+					AMOUNT = 50
+				}
+			}
+		}
+	}
+}
+
+on_custom_faith_culture_minority_add = {
+	effect = {
+		title:c_middlesex = {
+			clever_culture_add = {
+				CULTURE = culture:anglo_saxon
 				AMOUNT = 50
 			}
 		}
@@ -186,6 +215,8 @@ test_on_action_minority = {
 	effect = {
 		every_county = {
 			save_scope_as = current_county
+
+			
 
 			culture_story_cycle_create = {
 				COUNTY = scope:current_county

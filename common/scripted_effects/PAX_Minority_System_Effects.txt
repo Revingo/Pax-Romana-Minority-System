@@ -267,7 +267,7 @@ fix_faith_list = {
 
 	set_variable = {
 		name = total_to_add
-		value = 100.00
+		value = 100
 	}
 
 	every_in_list = {
@@ -388,12 +388,29 @@ clever_culture_add = {
 
 		every_in_list = {
 			variable = culture_minorities
+
+			save_scope_as = current_county_amount_edit
 	
 			limit = { NOT = { var:culture = $CULTURE$ } }
 	
+			scope:county_add = {
+				set_variable = {
+					name = clever_subtract
+					value = {
+						value = scope:current_county_amount_edit.var:amount
+						multiply = $AMOUNT$
+						divide = 100
+					}
+				}
+			}
+
 			change_variable = {
 				name = amount
 				subtract = scope:county_add.var:clever_subtract
+			}
+
+			scope:county_add = {
+				remove_variable = clever_subtract
 			}
 		}
 	}
@@ -416,12 +433,29 @@ clever_culture_add = {
 
 		every_in_list = {
 			variable = culture_minorities
+
+			save_scope_as = current_county_amount_edit
 	
 			limit = { NOT = { var:culture = $CULTURE$ } }
 	
+			scope:county_add = {
+				set_variable = {
+					name = clever_subtract
+					value = {
+						value = scope:current_county_amount_edit.var:amount
+						multiply = $AMOUNT$
+						divide = 100
+					}
+				}
+			}
+
 			change_variable = {
 				name = amount
 				subtract = scope:county_add.var:clever_subtract
+			}
+
+			scope:county_add = {
+				remove_variable = clever_subtract
 			}
 		}
 	}
@@ -431,8 +465,6 @@ clever_culture_add = {
 	fix_culture_list = yes
 
 	remove_variable = clever_counter
-
-	remove_variable = clever_subtract
 }
 
 clever_faith_add = {
@@ -451,14 +483,6 @@ clever_faith_add = {
 				name = clever_counter
 				add = 1
 			}
-		}
-	}
-
-	set_variable = {
-		name = clever_subtract
-		value = {
-			value = $AMOUNT$
-			divide = var:clever_counter
 		}
 	}
 
@@ -482,12 +506,29 @@ clever_faith_add = {
 
 		every_in_list = {
 			variable = faith_minorities
+
+			save_scope_as = current_county_amount_edit
 	
 			limit = { NOT = { var:faith = $FAITH$ } }
 	
+			scope:county_add = {
+				set_variable = {
+					name = clever_subtract
+					value = {
+						value = scope:current_county_amount_edit.var:amount
+						multiply = $AMOUNT$
+						divide = 100
+					}
+				}
+			}
+
 			change_variable = {
 				name = amount
 				subtract = scope:county_add.var:clever_subtract
+			}
+
+			scope:county_add = {
+				remove_variable = clever_subtract
 			}
 		}
 	}
@@ -510,11 +551,28 @@ clever_faith_add = {
 		every_in_list = {
 			variable = faith_minorities
 	
+			save_scope_as = current_county_amount_edit
+	
 			limit = { NOT = { var:faith = $FAITH$ } }
 	
+			scope:county_add = {
+				set_variable = {
+					name = clever_subtract
+					value = {
+						value = scope:current_county_amount_edit.var:amount
+						multiply = $AMOUNT$
+						divide = 100
+					}
+				}
+			}
+
 			change_variable = {
 				name = amount
 				subtract = scope:county_add.var:clever_subtract
+			}
+
+			scope:county_add = {
+				remove_variable = clever_subtract
 			}
 		}
 	}
@@ -524,6 +582,4 @@ clever_faith_add = {
 	fix_culture_list = yes
 
 	remove_variable = clever_counter
-
-	remove_variable = clever_subtract
 }

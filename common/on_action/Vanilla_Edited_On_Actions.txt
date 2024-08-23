@@ -2,11 +2,18 @@
 	on_actions = {
 		on_game_start_minorities_setup
 		#test_on_action_minority
+		on_custom_faith_culture_minority_add
 	}
 }
 
 on_culture_created = {
 	on_actions = {
 		on_new_culture_minority_system
+	}
+}
+
+on_faith_created = {
+	on_actions = {
+		on_new_faith_minority_system
 	}
 }
