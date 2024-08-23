@@ -386,33 +386,31 @@ clever_culture_add = {
 			AMOUNT = $AMOUNT$
 		}
 
+		set_variable = {
+			name = clever_subtract
+			value = {
+				value = $AMOUNT$
+				divide = {
+					value = var:clever_counter
+					subtract = 1
+				}
+			}
+		}
+
 		every_in_list = {
 			variable = culture_minorities
 
 			save_scope_as = current_county_amount_edit
 	
 			limit = { NOT = { var:culture = $CULTURE$ } }
-	
-			scope:county_add = {
-				set_variable = {
-					name = clever_subtract
-					value = {
-						value = scope:current_county_amount_edit.var:amount
-						multiply = $AMOUNT$
-						divide = 100
-					}
-				}
-			}
 
 			change_variable = {
 				name = amount
 				subtract = scope:county_add.var:clever_subtract
 			}
-
-			scope:county_add = {
-				remove_variable = clever_subtract
-			}
 		}
+
+		remove_variable = clever_subtract
 	}
 	else_if = {
 
@@ -433,8 +431,6 @@ clever_culture_add = {
 
 		every_in_list = {
 			variable = culture_minorities
-
-			save_scope_as = current_county_amount_edit
 	
 			limit = { NOT = { var:culture = $CULTURE$ } }
 	
@@ -459,8 +455,6 @@ clever_culture_add = {
 			}
 		}
 	}
-
-	fix_faith_list = yes
 
 	fix_culture_list = yes
 
@@ -504,33 +498,29 @@ clever_faith_add = {
 			AMOUNT = $AMOUNT$
 		}
 
-		every_in_list = {
-			variable = faith_minorities
-
-			save_scope_as = current_county_amount_edit
-	
-			limit = { NOT = { var:faith = $FAITH$ } }
-	
-			scope:county_add = {
-				set_variable = {
-					name = clever_subtract
-					value = {
-						value = scope:current_county_amount_edit.var:amount
-						multiply = $AMOUNT$
-						divide = 100
-					}
+		set_variable = {
+			name = clever_subtract
+			value = {
+				value = $AMOUNT$
+				divide = {
+					value = var:clever_counter
+					subtract = 1
 				}
 			}
+		}
+
+		every_in_list = {
+			variable = faith_minorities
+	
+			limit = { NOT = { var:faith = $FAITH$ } }
 
 			change_variable = {
 				name = amount
 				subtract = scope:county_add.var:clever_subtract
 			}
-
-			scope:county_add = {
-				remove_variable = clever_subtract
-			}
 		}
+
+		remove_variable = clever_subtract
 	}
 	else_if = {
 		limit = {
@@ -578,8 +568,6 @@ clever_faith_add = {
 	}
 
 	fix_faith_list = yes
-
-	fix_culture_list = yes
 
 	remove_variable = clever_counter
 }
