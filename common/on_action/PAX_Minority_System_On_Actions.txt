@@ -56,8 +56,6 @@
 				}
 			}
 
-			
-
 			every_in_list = {
 				variable = to_add_cultures
 
@@ -200,14 +198,99 @@ on_new_faith_minority_system = {
 	}
 }
 
-on_custom_faith_culture_minority_add = {
+on_culture_shift_attacker_won_war = {
 	effect = {
-		title:c_middlesex = {
-			clever_culture_add = {
-				CULTURE = culture:anglo_saxon
-				AMOUNT = 50
+
+		if = {
+			limit = {
+				scope:defender = {
+					AND = {
+						is_landed = yes
+
+						any_culture_minority_in_realm = {
+							CULTURE = scope:defender.culture
+						}
+					}
+				}
+			}
+
+			scope:defender = {
+				every_realm_county = {
+					clever_culture_add = {
+						CULTURE = scope:defender.culture
+						AMOUNT = -10
+					}
+				}
+	
+				#every_realm_border_county
+				every_character_to_title_neighboring_county = {
+					clever_culture_add = {
+						CULTURE = scope:defender.culture
+						AMOUNT = 10
+					}
+				}
 			}
 		}
+
+		scope:attacker = {
+			every_realm_county = {
+				clever_culture_add = {
+					CULTURE = scope:defender.culture
+					AMOUNT = -10
+				}
+			}
+		}
+	}
+}
+
+on_culture_shift_defender_won_war = {
+	effect = {
+
+		if = {
+			limit = {
+				scope:attacker = {
+					AND = {
+						is_landed = yes
+
+						any_culture_minority_in_realm = {
+							CULTURE = scope:attacker.culture
+						}
+					}
+				}
+			}
+
+			scope:attacker = {
+				every_realm_county = {
+					clever_culture_add = {
+						CULTURE = scope:attacker.culture
+						AMOUNT = -10
+					}
+				}
+	
+				#every_realm_border_county
+				every_character_to_title_neighboring_county = {
+					clever_culture_add = {
+						CULTURE = scope:attacker.culture
+						AMOUNT = 10
+					}
+				}
+			}
+		}
+
+		scope:defender = {
+			every_realm_county = {
+				clever_culture_add = {
+					CULTURE = scope:attacker.culture
+					AMOUNT = -10
+				}
+			}
+		}
+	}
+}
+
+on_custom_faith_culture_minority_add = {
+	effect = {
+
 	}
 }
 
@@ -215,8 +298,6 @@ test_on_action_minority = {
 	effect = {
 		every_county = {
 			save_scope_as = current_county
-
-			
 
 			culture_story_cycle_create = {
 				COUNTY = scope:current_county

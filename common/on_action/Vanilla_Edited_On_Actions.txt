@@ -17,3 +17,15 @@ on_faith_created = {
 		on_new_faith_minority_system
 	}
 }
+
+on_war_won_attacker = {
+	on_actions = {
+		on_culture_shift_attacker_won_war
+	}
+}
+
+on_war_won_defender = {
+	on_actions = {
+		on_culture_shift_defender_won_war
+	}
+}

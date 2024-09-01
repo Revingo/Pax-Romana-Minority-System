@@ -33,6 +33,7 @@ window = {
 		name = _show
 		on_start = "[GetVariableSystem.Set( 'county_view_open', 'true' )]"
 		on_start = "[GetVariableSystem.Set( 'hide_bottom_left_HUD', 'true' )]"
+		on_start = "[GetVariableSystem.Set( 'county_tabs', 'info' )]"
 
 		using = Animation_FadeIn_Standard
 		using = Sound_WindowShow_Standard
@@ -43,6 +44,7 @@ window = {
 		name = _hide
 		on_start = "[GetVariableSystem.Clear( 'county_view_open' )]"
 		on_start = "[GetVariableSystem.Clear( 'hide_bottom_left_HUD' )]"
+		on_start = "[GetVariableSystem.Clear( 'county_tabs', 'info' )]"
 
 		using = Animation_FadeOut_Standard
 		using = Sound_WindowHide_Standard

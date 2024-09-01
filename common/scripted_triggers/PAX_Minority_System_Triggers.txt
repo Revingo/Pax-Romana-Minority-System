@@ -17,3 +17,13 @@ faith_is_already_in_list = {
 		}
 	#}
 }
+
+any_culture_minority_in_realm = {
+	any_realm_county = {
+		any_in_list = {
+			variable = culture_minorities
+
+			this.var:culture = $CULTURE$
+		}
+	}
+}
