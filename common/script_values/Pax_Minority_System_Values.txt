@@ -8,3 +8,8 @@ corrected_percentage_value_calculation = {
 	value = var:percentage_amount
 	multiply = var:repeting
 }
+
+average_neighboring_counties_when_sieged = {
+	value = 10
+	divide = scope:barony.county.var:counter
+}

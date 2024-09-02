@@ -29,3 +29,15 @@ on_war_won_defender = {
 		on_culture_shift_defender_won_war
 	}
 }
+
+on_army_enter_province = {
+	on_actions = {
+		on_army_commander_culture_in_county
+	}
+}
+
+on_siege_completion = {
+	on_actions = {
+		on_county_culture_shift_gets_sieged
+	}
+}

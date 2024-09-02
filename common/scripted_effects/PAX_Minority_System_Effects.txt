@@ -497,15 +497,17 @@ clever_faith_add = {
 change_dominant_culture = {
 	save_scope_as = county_dominant_to_change
 
-	random_in_list = {
+	every_in_list = {
 		variable = culture_minorities
 
-		save_scope_as = random_culture
+		limit = { scope:county_dominant_to_change.culture = this.var:culture }
+
+		save_scope_as = highest_story_culture
 
 		scope:county_dominant_to_change = {
 			set_variable = {
 				name = highest_culture
-				value = scope:random_culture
+				value = scope:highest_story_culture
 			}
 		}
 	}
@@ -515,7 +517,7 @@ change_dominant_culture = {
 
 		save_scope_as = current_culture
 
-		limit = { var:amount > scope:county_dominant_to_change.var:highest_culture.var:amount }
+		limit = { this.var:amount > scope:county_dominant_to_change.var:highest_culture.var:amount }
 
 		scope:county_dominant_to_change = {
 			remove_variable = highest_culture
@@ -528,9 +530,9 @@ change_dominant_culture = {
 	}
 
 	if = {
-		limit = { NOT = { var:highest_culture.var:culture = culture  } }
+		limit = { NOT = { this.var:highest_culture.var:culture = culture  } }
 
-		set_county_culture = var:highest_culture.var:culture
+		set_county_culture = this.var:highest_culture.var:culture
 	}
 
 	remove_variable = highest_culture
@@ -539,15 +541,17 @@ change_dominant_culture = {
 change_dominant_faith = {
 	save_scope_as = county_dominant_to_change
 
-	random_in_list = {
+	every_in_list = {
 		variable = faith_minorities
 
-		save_scope_as = random_faith
+		limit = { scope:county_dominant_to_change.faith = this.var:faith }
+
+		save_scope_as = highest_story_faith
 
 		scope:county_dominant_to_change = {
 			set_variable = {
 				name = highest_faith
-				value = scope:random_faith
+				value = scope:highest_story_faith
 			}
 		}
 	}
@@ -557,7 +561,7 @@ change_dominant_faith = {
 
 		save_scope_as = current_faith
 
-		limit = { var:amount > scope:county_dominant_to_change.var:highest_faith.var:amount }
+		limit = { this.var:amount > scope:county_dominant_to_change.var:highest_faith.var:amount }
 
 		scope:county_dominant_to_change = {
 			remove_variable = highest_faith
@@ -570,9 +574,9 @@ change_dominant_faith = {
 	}
 
 	if = {
-		limit = { NOT = { var:highest_faith.var:faith = faith  } }
+		limit = { NOT = { this.var:highest_faith.var:faith = faith  } }
 
-		set_county_faith = var:highest_faith.var:faith
+		set_county_faith = this.var:highest_faith.var:faith
 	}
 
 	remove_variable = highest_faith
@@ -688,7 +692,5 @@ war_culture_add = {
 			}
 			
 		}
-
-
 	}
 }

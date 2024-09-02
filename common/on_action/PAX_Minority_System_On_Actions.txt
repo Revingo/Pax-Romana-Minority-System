@@ -218,7 +218,7 @@ on_culture_shift_attacker_won_war = {
 				every_realm_county = {
 					clever_culture_add = {
 						CULTURE = scope:defender.culture
-						AMOUNT = -10
+						AMOUNT = -5
 					}
 				}
 	
@@ -226,7 +226,7 @@ on_culture_shift_attacker_won_war = {
 				every_character_to_title_neighboring_county = {
 					clever_culture_add = {
 						CULTURE = scope:defender.culture
-						AMOUNT = 10
+						AMOUNT = 5
 					}
 				}
 			}
@@ -236,7 +236,7 @@ on_culture_shift_attacker_won_war = {
 			every_realm_county = {
 				clever_culture_add = {
 					CULTURE = scope:defender.culture
-					AMOUNT = -10
+					AMOUNT = -5
 				}
 			}
 		}
@@ -263,7 +263,7 @@ on_culture_shift_defender_won_war = {
 				every_realm_county = {
 					clever_culture_add = {
 						CULTURE = scope:attacker.culture
-						AMOUNT = -10
+						AMOUNT = -5
 					}
 				}
 	
@@ -271,7 +271,7 @@ on_culture_shift_defender_won_war = {
 				every_character_to_title_neighboring_county = {
 					clever_culture_add = {
 						CULTURE = scope:attacker.culture
-						AMOUNT = 10
+						AMOUNT = 5
 					}
 				}
 			}
@@ -281,9 +281,74 @@ on_culture_shift_defender_won_war = {
 			every_realm_county = {
 				clever_culture_add = {
 					CULTURE = scope:attacker.culture
-					AMOUNT = -10
+					AMOUNT = -5
 				}
 			}
+		}
+	}
+}
+
+on_army_commander_culture_in_county = {
+	effect = {
+		save_scope_as = army_owner
+
+		scope:army = {
+			if = {
+				limit = { exists = army_commander }
+
+				army_commander = {
+					save_scope_as = commander
+					location = {
+						county = {
+							if = {
+								limit = { has_variable = entering_commander_culture }
+
+								remove_variable = entering_commander_culture
+							}
+							set_variable = {
+								name = entering_commander_culture
+								value = scope:commander.culture
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+on_county_culture_shift_gets_sieged = {
+	effect = {
+		scope:barony.county = {
+
+			culture = {
+				save_scope_as = this_county_culture
+
+				scope:barony.county = {
+					clever_culture_add = {
+						CULTURE = scope:this_county_culture
+						AMOUNT = -10
+					}
+					every_neighboring_county = {
+						clever_culture_add = {
+							CULTURE = scope:this_county_culture
+							AMOUNT = average_neighboring_counties_when_sieged
+						}
+					}
+		
+					if = {
+						limit = { has_variable = entering_commander_culture }
+		
+						clever_culture_add = {
+							CULTURE = var:entering_commander_culture
+							AMOUNT = 5
+						}
+		
+						remove_variable = entering_commander_culture
+					}
+				}
+			}
+			
 		}
 	}
 }
