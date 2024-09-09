@@ -30,14 +30,17 @@ on_war_won_defender = {
 	}
 }
 
-on_army_enter_province = {
-	on_actions = {
-		on_army_commander_culture_in_county
-	}
-}
-
 on_siege_completion = {
 	on_actions = {
 		on_county_culture_shift_gets_sieged
+	}
+}
+
+yearly_playable_pulse = {
+	on_actions = {
+		#on_low_fervor_other_faiths_increase
+		on_ruler_in_debt_culture_decrease
+		on_ruler_piety_level_faith_change
+		on_minorities_check
 	}
 }

@@ -27,3 +27,13 @@ any_culture_minority_in_realm = {
 		}
 	}
 }
+
+any_faith_minority_in_realm = {
+	any_realm_county = {
+		any_in_list = {
+			variable = faith_minorities
+
+			this.var:faith = $FAITH$
+		}
+	}
+}

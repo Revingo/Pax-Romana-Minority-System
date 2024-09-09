@@ -44,7 +44,7 @@ window = {
 		name = _hide
 		on_start = "[GetVariableSystem.Clear( 'county_view_open' )]"
 		on_start = "[GetVariableSystem.Clear( 'hide_bottom_left_HUD' )]"
-		on_start = "[GetVariableSystem.Clear( 'county_tabs', 'info' )]"
+		on_start = "[GetVariableSystem.Clear( 'county_tabs' )]"
 
 		using = Animation_FadeOut_Standard
 		using = Sound_WindowHide_Standard
@@ -194,88 +194,25 @@ window = {
 		
 
 		hbox = {
-
 			name = "county_tab"
 
-			layoutpolicy_horizontal = shrinking
-			
-			hbox = {
-				layoutpolicy_horizontal = expanding
-				margin = { 10 2 }
-				spacing = 6
-	
-				hbox = {
-					datamodel = "[HoldingView.GetDeJureLieges]"
-	
-					item = {
-						coa_title_tiny_crown = {
-							visible = "[GreaterThan_int32( Title.GetTierFrame, '(int32)3' )]"
-							using = tooltip_se
-						}
-					}
-				}
-	
-				text_single = {
-					text = "DE_JURE_HIERARCHY"
-					default_format = "#low"
-				}
-	
-				expand = {}
-	
-				hbox = {
-					name = "county_modifiers_grid"
-					datamodel = "[HoldingView.GetCountyModifiers]"
-	
-					item = {
-						modifier_item_icon = {
-							size = { 30 30 }
-	
-							blockoverride "icon_data" {
-								using = tooltip_ne
-							}
-						}
-					}
-				}
-	
-				hbox = {
-					layoutpolicy_vertical = expanding
-					visible = [County.IsFullyOccupied]
-					datacontext = [County.GetCountyOccupant]
-	
-					widget = {
-						size = { 52 52 }
-	
-						icon = {
-							size = { 70 70 }
-							name = "war_icon"
-							texture = "gfx/interface/icons/war_status/war_icon.dds"
-							parentanchor = center
-						}
-	
-						coa_realm_small = {
-							position = { 1 0 }
-							blockoverride "coa_button" {
-								tooltip = "COUNTY_OCCUPIER_TOOLTIP"
-								onclick = "[DefaultOnRealmFlagClick(Character.GetID)]"
-								onrightclick = "[DefaultOnCharacterRightClick(Character.GetID)]"
-								button_ignore = none
-								tooltip_visible = "[Not(IsInteractionMenuOpenForCharacter(Character.GetID))]"
-							}
-						}
-					}
-				}
-			}
+
+			layoutpolicy_horizontal = expanding
+			spacing = 6
+			max_width = 625
 
 			spacer = {
-				size = { 50 0 }
+				size = { 2 0 }
 			}
+			
 			
 			button_tab = {
 				size = { 50 50 }
 				name = "county_info_tab"
 				layoutpolicy_horizontal = fixed
 				layoutpolicy_vertical = fixed
-				down = "[GetVariableSystem.HasValue('county_tabs', 'info')]"
+				down = "[Not(GetVariableSystem.HasValue('county_tabs', 'info'))]"
+				up = "[GetVariableSystem.HasValue('county_tabs', 'info')]"
 
 				background = {
 					margin = { -5 -5 }
@@ -292,7 +229,8 @@ window = {
 				name = "county_cultures_tab"
 				layoutpolicy_horizontal = fixed
 				layoutpolicy_vertical = fixed
-				down = "[GetVariableSystem.HasValue('county_tabs', 'cultures')]"
+				down = "[Not(GetVariableSystem.HasValue('county_tabs', 'cultures'))]"
+				up = "[GetVariableSystem.HasValue('county_tabs', 'cultures')]"
 
 				background = {
 					margin = { -5 -5 }
@@ -304,12 +242,14 @@ window = {
 
 				onclick = "[GetVariableSystem.Set('county_tabs', 'cultures')]"
 			}
+
 			button_tab = {
 				size = { 50 50 }
 				name = "county_faiths_tab"
 				layoutpolicy_horizontal = fixed
 				layoutpolicy_vertical = fixed
-				down = "[GetVariableSystem.HasValue('county_tabs', 'faiths')]"
+				down = "[Not(GetVariableSystem.HasValue('county_tabs', 'faiths'))]"
+				up = "[GetVariableSystem.HasValue('county_tabs', 'faiths')]"
 
 				background = {
 					margin = { -5 -5 }
@@ -318,9 +258,83 @@ window = {
 					texture = "gfx/interface/icons/minority_system/faiths_icon_tab.dds"
 				}
 				
-
 				onclick = "[GetVariableSystem.Set('county_tabs', 'faiths')]"
 			}
+		
+
+			spacer = {
+				size = { 15 0 }
+			}
+
+			hbox = {
+				layoutpolicy_horizontal = expanding
+				margin = { 10 2 }
+				spacing = 6
+
+				hbox = {
+					datamodel = "[HoldingView.GetDeJureLieges]"
+
+					item = {
+						coa_title_tiny_crown = {
+							visible = "[GreaterThan_int32( Title.GetTierFrame, '(int32)3' )]"
+							using = tooltip_se
+						}
+					}
+				}
+
+				text_single = {
+					text = "DE_JURE_HIERARCHY"
+					default_format = "#low"
+				}
+
+				expand = {}
+
+				hbox = {
+					name = "county_modifiers_grid"
+					datamodel = "[HoldingView.GetCountyModifiers]"
+
+					item = {
+						modifier_item_icon = {
+							size = { 25 25 }
+
+							blockoverride "icon_data" {
+								using = tooltip_ne
+							}
+						}
+					}
+				}
+
+				hbox = {
+					layoutpolicy_vertical = expanding
+					visible = [County.IsFullyOccupied]
+					datacontext = [County.GetCountyOccupant]
+
+					widget = {
+						size = { 52 52 }
+
+						icon = {
+							size = { 70 70 }
+							name = "war_icon"
+							texture = "gfx/interface/icons/war_status/war_icon.dds"
+							parentanchor = center
+						}
+
+						coa_realm_small = {
+							position = { 1 0 }
+							#size = { 35 35 }
+							blockoverride "coa_button" {
+								tooltip = "COUNTY_OCCUPIER_TOOLTIP"
+								onclick = "[DefaultOnRealmFlagClick(Character.GetID)]"
+								onrightclick = "[DefaultOnCharacterRightClick(Character.GetID)]"
+								button_ignore = none
+								tooltip_visible = "[Not(IsInteractionMenuOpenForCharacter(Character.GetID))]"
+							}
+						}
+					}
+				}
+			}
+
+			expand = {}
 		}
 
 		hbox = {
@@ -329,9 +343,45 @@ window = {
 			layoutpolicy_horizontal = expanding
 			visible = "[GetVariableSystem.HasValue('county_tabs', 'info')]"
 
+			state = {
+				name = _show
+				using = Animation_FadeIn_Quick
+			}
+
+			state = {
+				name = _hide
+				alpha = 0
+			}
+
 			background = {
-				using = Background_Area
-				margin_bottom = -2
+				using = Background_Area_Dark
+				margin = { -8 4 }
+				alpha = 0.55
+			}
+
+			background = {
+				texture = "gfx/interface/component_masks/mask_frame.dds"
+				spriteType = Corneredstretched
+				spriteborder = { 15 15 }
+				using = Color_Black
+				margin = { -5 8 }
+			}
+
+			background = {
+				using = Background_Area_With_Header
+				fittype = centercrop
+				alpha = 0.1
+
+				modify_texture = {
+					texture = "gfx/interface/component_overlay/overlay_effect.dds"
+					blend_mode = overlay
+				}
+
+				modify_texture = {
+					texture = "gfx/interface/window_county/mask_holding_illustration.dds"
+					blend_mode = alphamultiply
+					alpha = 0.95
+				}
 			}
 
 			hbox = {
@@ -610,19 +660,45 @@ window = {
 
 			visible = "[GetVariableSystem.HasValue('county_tabs', 'cultures')]"
 
+			state = {
+				name = _show
+				using = Animation_FadeIn_Quick
+			}
+
+			state = {
+				name = _hide
+				alpha = 0
+			}
+
+			background = {
+				using = Background_Area_Dark
+				margin = { -8 4 }
+				alpha = 0.7
+			}
+
+			background = {
+				texture = "gfx/interface/component_masks/mask_frame.dds"
+				spriteType = Corneredstretched
+				spriteborder = { 15 15 }
+				using = Color_Black
+				margin = { -5 8 }
+			}
+
 			background = {
 				texture = "gfx/interface/minority_system_illustrations/cultures_illustration.dds"
 				fittype = centercrop
 				alpha = 0.1
-
-				modify_texture = {
-					texture = "gfx/interface/component_masks/mask_fade_vertical_up_dark.dds"
-					blend_mode = alphamultiply
-				}
+				margin = { -5 8 }
 
 				modify_texture = {
 					texture = "gfx/interface/component_overlay/overlay_effect.dds"
 					blend_mode = overlay
+				}
+
+				modify_texture = {
+					texture = "gfx/interface/window_county/mask_holding_illustration.dds"
+					blend_mode = alphamultiply
+					alpha = 0.95
 				}
 			}
 
@@ -754,19 +830,44 @@ window = {
 
 			visible = "[GetVariableSystem.HasValue('county_tabs', 'faiths')]"
 
+			state = {
+				name = _show
+				using = Animation_FadeIn_Quick
+			}
+
+			state = {
+				name = _hide
+				alpha = 0
+			}
+
+			background = {
+				using = Background_Area_Dark
+				margin = { -8 4 }
+				alpha = 0.7
+			}
+
+			background = {
+				texture = "gfx/interface/component_masks/mask_frame.dds"
+				spriteType = Corneredstretched
+				spriteborder = { 15 15 }
+				using = Color_Black
+				margin = { -5 8 }
+			}
+
 			background = {
 				texture = "gfx/interface/minority_system_illustrations/faiths_illustration.dds"
 				fittype = centercrop
 				alpha = 0.1
 
 				modify_texture = {
-					texture = "gfx/interface/component_masks/mask_fade_vertical_up_dark.dds"
-					blend_mode = alphamultiply
+					texture = "gfx/interface/component_overlay/overlay_effect.dds"
+					blend_mode = overlay
 				}
 
 				modify_texture = {
-					texture = "gfx/interface/component_overlay/overlay_effect.dds"
-					blend_mode = overlay
+					texture = "gfx/interface/window_county/mask_holding_illustration.dds"
+					blend_mode = alphamultiply
+					alpha = 0.95
 				}
 			}
 

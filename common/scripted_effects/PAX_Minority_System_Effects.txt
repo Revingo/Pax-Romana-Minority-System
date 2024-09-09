@@ -512,30 +512,160 @@ change_dominant_culture = {
 		}
 	}
 
-	every_in_list = {
-		variable = culture_minorities
+	if = {
+		limit = { has_variable = highest_culture }
 
-		save_scope_as = current_culture
-
-		limit = { this.var:amount > scope:county_dominant_to_change.var:highest_culture.var:amount }
-
-		scope:county_dominant_to_change = {
-			remove_variable = highest_culture
-
-			set_variable = {
-				name = highest_culture
-				value = scope:current_culture
+		every_in_list = {
+			variable = culture_minorities
+	
+			save_scope_as = current_culture
+	
+			limit = { this.var:amount > scope:county_dominant_to_change.var:highest_culture.var:amount }
+	
+			scope:county_dominant_to_change = {
+				remove_variable = highest_culture
+	
+				set_variable = {
+					name = highest_culture
+					value = scope:current_culture
+				}
 			}
 		}
+	
+		if = {
+			limit = { NOT = { this.var:highest_culture.var:culture = culture  } }
+	
+			set_county_culture = this.var:highest_culture.var:culture
+		}
+	
+		remove_variable = highest_culture
 	}
+	else = {
+		error_log = "highest culture variable is not set! This should not be happening!"
 
-	if = {
-		limit = { NOT = { this.var:highest_culture.var:culture = culture  } }
+		#####################################################################################
+		# START OF CLEVER_CULTURE_ADD COPIED SECTION
+		#####################################################################################
 
-		set_county_culture = this.var:highest_culture.var:culture
+		culture = {
+			save_scope_as = county_culture
+		}
+
+		set_variable = {
+			name = clever_counter
+			value = 0
+		}
+	
+		every_in_list = {
+			variable = culture_minorities
+	
+			scope:county_dominant_to_change = {
+				change_variable = {
+					name = clever_counter
+					add = 1
+				}
+			}
+		}
+	
+		if = {
+			limit = {
+				AND = {
+					culture_is_already_in_list = {
+						#COUNTY = $COUNTY$
+						CULTURE = scope:county_culture
+					}
+	
+					var:clever_counter > 1
+				}
+				
+			}
+	
+			change_value_of_culture_in_list = {
+				#COUNTY = $COUNTY$
+				CULTURE = scope:county_culture
+				AMOUNT = 50
+			}
+	
+			set_variable = {
+				name = clever_subtract
+				value = {
+					value = 50
+					divide = {
+						value = var:clever_counter
+						subtract = 1
+					}
+				}
+			}
+	
+			every_in_list = {
+				variable = culture_minorities
+		
+				limit = { NOT = { var:culture = scope:county_culture } }
+	
+				change_variable = {
+					name = amount
+					subtract = scope:county_dominant_to_change.var:clever_subtract
+				}
+			}
+	
+			remove_variable = clever_subtract
+		}
+		else_if = {
+	
+			limit = {
+				NOT = {
+					culture_is_already_in_list = {
+						#COUNTY = $COUNTY$
+						CULTURE = scope:county_culture
+					}
+				}
+			}
+	
+			culture_story_cycle_create = {
+				COUNTY = scope:county_dominant_to_change
+				CULTURE = scope:county_culture
+				AMOUNT = 50
+			}
+	
+			every_in_list = {
+				variable = culture_minorities
+	
+				save_scope_as = current_county_amount_edit
+		
+				limit = { NOT = { var:culture = scope:county_culture } }
+		
+				scope:county_dominant_to_change = {
+					set_variable = {
+						name = clever_subtract
+						value = {
+							value = scope:current_county_amount_edit.var:amount
+							multiply = 50
+							divide = 100
+						}
+					}
+				}
+	
+				change_variable = {
+					name = amount
+					subtract = scope:county_dominant_to_change.var:clever_subtract
+				}
+	
+				scope:county_dominant_to_change = {
+					remove_variable = clever_subtract
+				}
+			}
+		}
+	
+		fix_culture_list = yes
+	
+		remove_variable = clever_counter
+
+		#####################################################################################
+		# END OF CLEVER_CULTURE_ADD COPIED SECTION
+		#####################################################################################
+
+		error_log = "Added not tracked culture. THIS SHOULD NOT BE HAPPENING!"
 	}
-
-	remove_variable = highest_culture
 }
 
 change_dominant_faith = {
@@ -556,30 +686,158 @@ change_dominant_faith = {
 		}
 	}
 
-	every_in_list = {
-		variable = faith_minorities
+	if = {
+		limit = { has_variable = highest_faith }
 
-		save_scope_as = current_faith
-
-		limit = { this.var:amount > scope:county_dominant_to_change.var:highest_faith.var:amount }
-
-		scope:county_dominant_to_change = {
-			remove_variable = highest_faith
-
-			set_variable = {
-				name = highest_faith
-				value = scope:current_faith
+		every_in_list = {
+			variable = faith_minorities
+	
+			save_scope_as = current_faith
+	
+			limit = { this.var:amount > scope:county_dominant_to_change.var:highest_faith.var:amount }
+	
+			scope:county_dominant_to_change = {
+				remove_variable = highest_faith
+	
+				set_variable = {
+					name = highest_faith
+					value = scope:current_faith
+				}
 			}
 		}
+	
+		if = {
+			limit = { NOT = { this.var:highest_faith.var:faith = faith  } }
+	
+			set_county_faith = this.var:highest_faith.var:faith
+		}
+	
+		remove_variable = highest_faith
 	}
+	else = {
+		error_log = "highest faith variable is not set! This should not be happening!"
 
-	if = {
-		limit = { NOT = { this.var:highest_faith.var:faith = faith  } }
+		#####################################################################################
+		# START OF CLEVER_FAITH_ADD COPIED SECTION
+		#####################################################################################
 
-		set_county_faith = this.var:highest_faith.var:faith
+		faith = {
+			save_scope_as = county_faith
+		}
+
+		set_variable = {
+			name = clever_counter
+			value = 0
+		}
+	
+		every_in_list = {
+			variable = faith_minorities
+	
+			scope:county_dominant_to_change = {
+				change_variable = {
+					name = clever_counter
+					add = 1
+				}
+			}
+		}
+	
+		if = {
+			limit = {
+				AND = {
+					faith_is_already_in_list = {
+						#COUNTY = $COUNTY$
+						FAITH = scope:county_faith
+					}
+	
+					var:clever_counter > 1
+				}
+			}
+	
+			change_value_of_faith_in_list = {
+				#COUNTY = $COUNTY$
+				FAITH = scope:county_faith
+				AMOUNT = 50
+			}
+	
+			set_variable = {
+				name = clever_subtract
+				value = {
+					value = 50
+					divide = {
+						value = var:clever_counter
+						subtract = 1
+					}
+				}
+			}
+	
+			every_in_list = {
+				variable = faith_minorities
+		
+				limit = { NOT = { var:faith = scope:county_faith } }
+	
+				change_variable = {
+					name = amount
+					subtract = scope:county_dominant_to_change.var:clever_subtract
+				}
+			}
+	
+			remove_variable = clever_subtract
+		}
+		else_if = {
+			limit = {
+				NOT = {
+					faith_is_already_in_list = {
+						#COUNTY = $COUNTY$
+						FAITH = scope:county_faith
+					}
+				}
+			}
+	
+			faith_story_cycle_create = {
+				COUNTY = scope:county_dominant_to_change
+				FAITH = scope:county_faith
+				AMOUNT = 50
+			}
+	
+			every_in_list = {
+				variable = faith_minorities
+		
+				save_scope_as = current_county_amount_edit
+		
+				limit = { NOT = { var:faith = scope:county_faith } }
+		
+				scope:county_dominant_to_change = {
+					set_variable = {
+						name = clever_subtract
+						value = {
+							value = scope:current_county_amount_edit.var:amount
+							multiply = 50
+							divide = 100
+						}
+					}
+				}
+	
+				change_variable = {
+					name = amount
+					subtract = scope:county_dominant_to_change.var:clever_subtract
+				}
+	
+				scope:county_dominant_to_change = {
+					remove_variable = clever_subtract
+				}
+			}
+		}
+	
+		fix_faith_list = yes
+	
+		remove_variable = clever_counter
+
+		#####################################################################################
+		# END OF CLEVER_FAITH_ADD COPIED SECTION
+		#####################################################################################
+
+		error_log = "Added not tracked faith. THIS SHOULD NOT BE HAPPENING!"
 	}
-
-	remove_variable = highest_faith
 }
 
 small_culture_minorities_remover = {
