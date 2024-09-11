@@ -38,9 +38,15 @@ on_siege_completion = {
 
 yearly_playable_pulse = {
 	on_actions = {
-		#on_low_fervor_other_faiths_increase
+		on_low_fervor_other_faiths_increase
 		on_ruler_in_debt_culture_decrease
 		on_ruler_piety_level_faith_change
+		#on_minorities_check
+	}
+}
+
+quarterly_playable_pulse = {
+	on_actions = {
 		on_minorities_check
 	}
 }

@@ -13,3 +13,11 @@ average_neighboring_counties_when_sieged = {
 	value = 10
 	divide = scope:barony.county.var:counter
 }
+
+random_conversion_value = {
+	value = { 0.1 1 }
+}
+
+add_random_value = {
+	value = { 0.2 0.5 }
+}

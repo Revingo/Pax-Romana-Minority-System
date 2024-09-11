@@ -10,6 +10,7 @@ window = {
 	movable = no
 	layer = windows_layer
 	size = { 625 645 }
+	
 
 	background = {
 		texture = "gfx/interface/component_tiles/tile_window_background_subwindow.dds"
@@ -56,6 +57,7 @@ window = {
 		name = "window_content"
 		margin_right = 40
 		margin_top = 35
+		maximumsize = { 625 645 }
 		
 		datacontext = "[HoldingView.GetHolding]"
 		datacontext = "[HoldingView.GetProvince]"
@@ -70,6 +72,7 @@ window = {
 			margin_top = 5
 			margin_bottom = 5
 			spacing = 2
+			maximumsize = { 625 645 }
 
 			background = {
 				using = Background_Area_Dark
@@ -81,7 +84,9 @@ window = {
 			}
 
 			vbox = {
+				maximumsize = { 625 645 }
 				hbox = {
+					maximumsize = { 625 645 }
 					layoutpolicy_horizontal = expanding
 					ignoreinvisible = yes
 
@@ -199,11 +204,11 @@ window = {
 
 			layoutpolicy_horizontal = expanding
 			spacing = 6
-			max_width = 625
-
+			
 			spacer = {
 				size = { 2 0 }
 			}
+			maximumsize = { 625 645 }
 			
 			
 			button_tab = {
@@ -290,37 +295,22 @@ window = {
 				expand = {}
 
 				hbox = {
-					name = "county_modifiers_grid"
-					datamodel = "[HoldingView.GetCountyModifiers]"
-
-					item = {
-						modifier_item_icon = {
-							size = { 25 25 }
-
-							blockoverride "icon_data" {
-								using = tooltip_ne
-							}
-						}
-					}
-				}
-
-				hbox = {
 					layoutpolicy_vertical = expanding
 					visible = [County.IsFullyOccupied]
 					datacontext = [County.GetCountyOccupant]
 
 					widget = {
-						size = { 52 52 }
+						size = { 50 50 }
 
 						icon = {
-							size = { 70 70 }
+							size = { 43 48 }
 							name = "war_icon"
 							texture = "gfx/interface/icons/war_status/war_icon.dds"
 							parentanchor = center
 						}
 
-						coa_realm_small = {
-							position = { 1 0 }
+						coa_realm_tiny = {
+							position = { 7 8 }
 							#size = { 35 35 }
 							blockoverride "coa_button" {
 								tooltip = "COUNTY_OCCUPIER_TOOLTIP"
@@ -342,6 +332,7 @@ window = {
 			datacontext = "[HoldingView.GetProvince.GetCountyCapitalProvince]"
 			layoutpolicy_horizontal = expanding
 			visible = "[GetVariableSystem.HasValue('county_tabs', 'info')]"
+			maximumsize = { 625 645 }
 
 			state = {
 				name = _show
@@ -391,6 +382,7 @@ window = {
 				layoutpolicy_horizontal = expanding
 				margin = { 5 5 }
 				margin_right = 15
+				maximumsize = { 625 645 }
 
 				background = {
 					name = "Held_directly_by_me"
@@ -650,6 +642,35 @@ window = {
 						}
 					}
 				}
+
+				hbox = {
+					layoutpolicy_horizontal = expanding
+					name = "county_modifiers_grid"
+						
+					spacing = 3
+
+					text_single = {
+						layoutpolicy_horizontal = expanding
+						raw_text = "[county|E] [modifiers|E]:"
+					}
+
+					expand = {}
+
+					hbox = {
+						layoutpolicy_horizontal = expanding
+						datamodel = "[HoldingView.GetCountyModifiers]"
+						expand = {}
+						item = {
+							modifier_item_icon = {
+								size = { 25 25 }
+		
+								blockoverride "icon_data" {
+									using = tooltip_ne
+								}
+							}
+						}
+					}
+				}
 			}
 		}
 
@@ -657,6 +678,7 @@ window = {
 			name = "cultures_tab"
 			layoutpolicy_horizontal = expanding
 			using = tooltip_ne
+			maximumsize = { 625 645 }
 
 			visible = "[GetVariableSystem.HasValue('county_tabs', 'cultures')]"
 

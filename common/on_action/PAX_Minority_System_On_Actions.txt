@@ -178,6 +178,11 @@ on_new_culture_minority_system = {
 				AMOUNT = 50
 			}
 		}
+		every_culture_county = {
+			neighboring_counties_new_culture = {
+				CULTURE = scope:new_culture
+			}
+		}
 	}
 }
 
@@ -192,6 +197,13 @@ on_new_faith_minority_system = {
 				clever_faith_add = {
 					FAITH = scope:new_faith
 					AMOUNT = 50
+				}
+			}
+			every_county = {
+				limit = { this.faith = scope:new_faith }
+	
+				neighboring_counties_new_faith ={
+					FAITH = scope:new_faith
 				}
 			}
 		}
@@ -260,19 +272,9 @@ on_culture_shift_defender_won_war = {
 			}
 
 			scope:attacker = {
-				every_realm_county = {
-					clever_culture_add = {
-						CULTURE = scope:attacker.culture
-						AMOUNT = -5
-					}
-				}
-	
-				#every_realm_border_county
-				every_character_to_title_neighboring_county = {
-					clever_culture_add = {
-						CULTURE = scope:attacker.culture
-						AMOUNT = 5
-					}
+				realm_culture_emigration = {
+					CULTURE = scope:attacker.culture
+					AMOUNT = -5
 				}
 			}
 		}
@@ -349,7 +351,11 @@ on_ruler_in_debt_culture_decrease = {
 		
 		set_local_variable = {
 			name = temp_amount
-			value = -2
+			value = 0
+		}
+		set_local_variable = {
+			name = temp_em_amount
+			value = 0
 		}
 
 		if = {
@@ -368,7 +374,11 @@ on_ruler_in_debt_culture_decrease = {
 				}
 				change_local_variable = {
 					name = temp_amount
-					add = -3
+					add = -0.1
+				}
+				change_local_variable = {
+					name = temp_em_amount
+					add = 1
 				}
 			}
 			if = {
@@ -377,7 +387,11 @@ on_ruler_in_debt_culture_decrease = {
 				}
 				change_local_variable = {
 					name = temp_amount
-					add = -2
+					add = -0.1
+				}
+				change_local_variable = {
+					name = temp_em_amount
+					add = 2
 				}
 			}
 			if = {
@@ -386,7 +400,11 @@ on_ruler_in_debt_culture_decrease = {
 				}
 				change_local_variable = {
 					name = temp_amount
-					add = -1
+					add = -0.2
+				}
+				change_local_variable = {
+					name = temp_em_amount
+					add = 2
 				}
 			}
 			if = {
@@ -395,15 +413,18 @@ on_ruler_in_debt_culture_decrease = {
 				}
 				change_local_variable = {
 					name = temp_amount
-					add = -1
+					add = -0.2
+				}
+				change_local_variable = {
+					name = temp_em_amount
+					add = 3
 				}
 			}
 
-			every_realm_county = {
-				clever_culture_add = {
-					CULTURE = scope:realm_holder.culture
-					AMOUNT = local_var:temp_amount
-				}
+			realm_culture_emigration = {
+				CULTURE = scope:realm_holder.culture
+				AMOUNT = local_var:temp_amount
+				EMIGRATION_AMOUNT = local_var:temp_em_amount
 			}
 		}
 	}
@@ -448,7 +469,7 @@ on_ruler_piety_level_faith_change = {
 
 			change_local_variable = {
 				name = temp_amount
-				add = 1
+				add = 0.4
 			}
 
 			if = {
@@ -458,7 +479,7 @@ on_ruler_piety_level_faith_change = {
 
 				change_local_variable = {
 					name = temp_amount
-					add = 1
+					add = 0.4
 				}
 			}
 			if = {
@@ -468,7 +489,7 @@ on_ruler_piety_level_faith_change = {
 
 				change_local_variable = {
 					name = temp_amount
-					add = 2
+					add = 1
 				}
 			}
 			if = {
@@ -478,7 +499,7 @@ on_ruler_piety_level_faith_change = {
 
 				change_local_variable = {
 					name = temp_amount
-					add = 3
+					add = 1.5
 				}
 			}
 
@@ -502,6 +523,267 @@ on_minorities_check = {
 			fix_faith_list = yes
 
 			change_dominant_faith = yes
+		}
+	}
+}
+
+on_minority_system_faith_conversion = {
+	effect = {
+		set_local_variable = {
+			name = temp_conversion_amount
+			value = random_conversion_value
+		}
+
+		# Court Chapelain learning attributes
+		if = {
+			limit = { scope:councillor.learning < 5 }
+
+			change_local_variable = {
+				name = temp_conversion_amount
+				subtract = 0.4
+			}
+		}
+		if = {
+			limit = { scope:councillor.learning > 8 }
+
+			change_local_variable = {
+				name = temp_conversion_amount
+				add = add_random_value
+			}
+		}
+		if = {
+			limit = { scope:councillor.learning > 12 }
+
+			change_local_variable = {
+				name = temp_conversion_amount
+				add = add_random_value
+			}
+		}
+		if = {
+			limit = { scope:councillor.learning > 16 }
+
+			change_local_variable = {
+				name = temp_conversion_amount
+				add = add_random_value
+			}
+		}
+		if = {
+			limit = { scope:councillor.learning > 68 }
+
+			change_local_variable = {
+				name = temp_conversion_amount
+				add = add_random_value
+			}
+		}
+		if = {
+			limit = { scope:councillor.learning > 69 }
+
+			change_local_variable = {
+				name = temp_conversion_amount
+				add = add_random_value
+			}
+		}
+		
+		# Faster conversion for certain special doctrines
+		if = {
+			limit = {
+				scope:councillor_liege.faith = { has_doctrine_parameter = adoptionists_attractively_intuitive_theology }
+				exists = scope:county
+
+				scope:county = {
+					any_in_list = {
+						variable = faith_minorities
+
+						this.var:faith.religion = religion:christianity_religion
+						this.var:amount > 30
+					}
+				}
+			}
+			change_local_variable = {
+				name = temp_conversion_amount
+				add = add_random_value
+			}
+		}
+
+		# Development reduces the speed
+		if = {
+			limit = {
+				exists = scope:county
+				scope:county = {
+					development_level > 0
+				}
+			}
+
+			change_local_variable = {
+				name = temp_conversion_amount
+				subtract = add_random_value
+			}
+		}
+		
+		if = {
+			limit = {
+				scope:councillor.faith = {
+					has_doctrine_parameter = unreformed
+				}
+			}
+
+			change_local_variable = {
+				name = temp_conversion_amount
+				subtract = add_random_value
+			}
+		}
+		
+		# Faster conversion for FP2 Hostility ending, if county is in Iberia and faith was involved
+		if = {
+			limit = {
+				exists = scope:councillor.liege.house
+				scope:councillor.liege.house = {
+					OR = {
+						has_house_modifier = fp2_struggle_hostility_house_faith_modifier
+						has_house_modifier = fp2_struggle_hostility_house_combined_modifier
+					}
+				}
+				any_in_global_list = {
+					variable = fp2_struggle_ending_faith_list
+					
+					scope:county = {
+						any_in_list = {
+							variable = faith_minorities
+
+							this.var:faith = prev.prev
+							this.var:amount > 30
+						}
+					}
+				}
+				scope:county.title_province = { geographical_region = world_europe_west_iberia }
+			}
+
+			change_local_variable = {
+				name = temp_conversion_amount
+				multiply = fp2_struggle_hostility_conversion_value
+			}
+		}
+
+		# Game Rule Faith Conversion Speed
+		if = {
+			limit = {
+				has_game_rule = slower_faith_conversion_speed
+			}
+
+			change_local_variable = {
+				name = temp_conversion_amount
+				divide = 2
+			}
+		}
+		if = {
+			limit = {
+				has_game_rule = significantly_slower_faith_conversion_speed
+			}
+
+			change_local_variable = {
+				name = temp_conversion_amount
+				divide = 3
+			}
+		}
+		if = {
+			limit = {
+				has_game_rule = faster_faith_conversion_speed
+			}
+
+			change_local_variable = {
+				name = temp_conversion_amount
+				multiply = 2
+			}
+		}
+		if = {
+			limit = {
+				has_game_rule = significantly_faster_faith_conversion_speed
+			}
+
+			change_local_variable = {
+				name = temp_conversion_amount
+				multiply = 3
+			}
+		}
+
+		# FP3 faster conversion struggle ending rewards
+		if = {
+			limit = {
+				exists = global_var:fp3_struggle_ending_assertion_school
+				switch = {
+					trigger = global_var:fp3_struggle_ending_assertion_school
+					flag:sunni = {
+						scope:councillor.liege.faith = { has_doctrine = muhammad_succession_sunni_doctrine }
+					}
+					flag:shia = {
+						scope:councillor.liege.faith = { has_doctrine = muhammad_succession_sunni_doctrine }
+					}
+					flag:muhakkima = {
+						scope:councillor.liege.faith = { has_doctrine = muhammad_succession_muhakkima_doctrine }
+					}
+					flag:zandaqa = {
+						scope:councillor.liege.faith = { has_doctrine = muhammad_succession_zandaqa_doctrine }
+					}
+				}
+			}
+
+			change_local_variable = {
+				name = temp_conversion_amount
+				multiply = fp3_struggle_ending_conversion_modifier_value
+			}
+		}
+
+		# Faster conversion of Persian counties with the FP3 Promote Persian Scripture decision
+		if = {
+			limit = {
+				scope:councillor.liege = { 
+					has_character_modifier = fp3_promoted_persian_scripture_modifier 
+					is_ai = no #this is so that we don't get AI converting and homogenizing Persia too quickly
+				}
+				scope:county.culture = { has_cultural_pillar = heritage_iranian } 
+			}
+
+			change_local_variable = {
+				name = temp_conversion_amount
+				multiply = promote_persian_scripture_conversion_modifier_value
+			}
+		}
+
+		# Faster conversion of heretics for FP2 Council Toledo Heresies
+		if = {
+			limit = {
+				scope:councillor.liege = { has_character_modifier = fp2_council_conversion_modifier }
+				scope:county.faith = {
+					religion = scope:councillor.liege.religion
+					fp2_struggle_faith_is_mozarabic_trigger = no
+					NOT = { exists = religious_head }
+				}
+			}
+
+			change_local_variable = {
+				name = temp_conversion_amount
+				multiply = council_toledo_conversion_modifier_value
+			}
+		}
+
+		# Faster conversion of infidels for FP2 Council Toledo Conversion
+		if = {
+			limit = {
+				scope:councillor.liege = { has_character_modifier = fp2_council_conversion_modifier }
+				NOT = { scope:county.faith.religion = scope:councillor.liege.religion }
+			}
+
+			change_local_variable = {
+				name = temp_conversion_amount
+				multiply = council_toledo_conversion_modifier_value
+			}
+		}
+
+		scope:county = {
+			clever_faith_add = {
+				FAITH = scope:councillor.faith
+				AMOUNT = local_var:temp_conversion_amount
+			}
 		}
 	}
 }

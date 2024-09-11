@@ -1,0 +1,4 @@
+﻿no_other_faith_minorities = {
+	global = MINORITIES_no_other_faith_minorities
+	#global_not = MINORITIES_no_other_faith_minorities
+}

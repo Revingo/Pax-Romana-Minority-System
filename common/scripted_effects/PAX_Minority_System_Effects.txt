@@ -1,5 +1,5 @@
 ﻿culture_story_cycle_create = {
-	random_player = {
+	random_ruler = {
 
 		create_story = {
 			type = minority_system_story_cycle
@@ -28,7 +28,7 @@
 }
 
 faith_story_cycle_create = {
-	random_player = {
+	random_ruler = {
 
 		create_story = {
 			type = minority_system_story_cycle
@@ -949,6 +949,67 @@ war_culture_add = {
 				}
 			}
 			
+		}
+	}
+}
+
+realm_culture_emigration = {
+
+	every_realm_county = {
+		clever_culture_add = {
+			CULTURE = $CULTURE$
+			AMOUNT = $AMOUNT$
+		}
+	}
+	
+	every_character_to_title_neighboring_county = {
+		clever_culture_add = {
+			CULTURE = $CULTURE$
+			AMOUNT = $EMIGRATION_AMOUNT$
+		}
+	}
+}
+
+neighboring_counties_new_culture = {
+
+	every_neighboring_county = {
+		limit = {
+			NOT = {
+				OR = {
+					this.culture = $CULTURE$
+
+					culture_is_already_in_list = {
+						CULTURE = $CULTURE$
+					}
+				}
+			}
+		}
+
+		clever_culture_add = {
+			CULTURE = $CULTURE$
+			AMOUNT = 10
+		}
+	}
+}
+
+neighboring_counties_new_faith = {
+
+	every_neighboring_county = {
+		limit = {
+			NOT = {
+				OR = {
+					this.faith = $FAITH$
+
+					faith_is_already_in_list = {
+						FAITH = $FAITH$
+					}
+				}
+			}
+		}
+
+		clever_faith_add = {
+			FAITH = $FAITH$
+			AMOUNT = 10
 		}
 	}
 }
