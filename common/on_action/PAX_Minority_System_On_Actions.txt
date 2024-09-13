@@ -175,7 +175,7 @@ on_new_culture_minority_system = {
 		every_culture_county = {
 			clever_culture_add = {
 				CULTURE = scope:new_culture
-				AMOUNT = 50
+				AMOUNT = 65
 			}
 		}
 		every_culture_county = {
@@ -196,7 +196,7 @@ on_new_faith_minority_system = {
 	
 				clever_faith_add = {
 					FAITH = scope:new_faith
-					AMOUNT = 50
+					AMOUNT = 65
 				}
 			}
 			every_county = {
@@ -227,19 +227,10 @@ on_culture_shift_attacker_won_war = {
 			}
 
 			scope:defender = {
-				every_realm_county = {
-					clever_culture_add = {
-						CULTURE = scope:defender.culture
-						AMOUNT = -5
-					}
-				}
-	
-				#every_realm_border_county
-				every_character_to_title_neighboring_county = {
-					clever_culture_add = {
-						CULTURE = scope:defender.culture
-						AMOUNT = 5
-					}
+				realm_culture_emigration = {
+					CULTURE = scope:attacker.culture
+					AMOUNT = -1
+					EMIGRATION_AMOUNT = 2
 				}
 			}
 		}
@@ -248,7 +239,7 @@ on_culture_shift_attacker_won_war = {
 			every_realm_county = {
 				clever_culture_add = {
 					CULTURE = scope:defender.culture
-					AMOUNT = -5
+					AMOUNT = -3
 				}
 			}
 		}
@@ -274,7 +265,8 @@ on_culture_shift_defender_won_war = {
 			scope:attacker = {
 				realm_culture_emigration = {
 					CULTURE = scope:attacker.culture
-					AMOUNT = -5
+					AMOUNT = -1
+					EMIGRATION_AMOUNT = 2
 				}
 			}
 		}
@@ -283,7 +275,7 @@ on_culture_shift_defender_won_war = {
 			every_realm_county = {
 				clever_culture_add = {
 					CULTURE = scope:attacker.culture
-					AMOUNT = -5
+					AMOUNT = -3
 				}
 			}
 		}
@@ -636,8 +628,8 @@ on_minority_system_faith_conversion = {
 		# Faster conversion for FP2 Hostility ending, if county is in Iberia and faith was involved
 		if = {
 			limit = {
-				exists = scope:councillor.liege.house
-				scope:councillor.liege.house = {
+				exists = liege.house
+				liege.house = {
 					OR = {
 						has_house_modifier = fp2_struggle_hostility_house_faith_modifier
 						has_house_modifier = fp2_struggle_hostility_house_combined_modifier
@@ -736,7 +728,7 @@ on_minority_system_faith_conversion = {
 		# Faster conversion of Persian counties with the FP3 Promote Persian Scripture decision
 		if = {
 			limit = {
-				scope:councillor.liege = { 
+				scope:councillor_liege = { 
 					has_character_modifier = fp3_promoted_persian_scripture_modifier 
 					is_ai = no #this is so that we don't get AI converting and homogenizing Persia too quickly
 				}
@@ -752,9 +744,9 @@ on_minority_system_faith_conversion = {
 		# Faster conversion of heretics for FP2 Council Toledo Heresies
 		if = {
 			limit = {
-				scope:councillor.liege = { has_character_modifier = fp2_council_conversion_modifier }
+				scope:councillor_liege = { has_character_modifier = fp2_council_conversion_modifier }
 				scope:county.faith = {
-					religion = scope:councillor.liege.religion
+					religion = liege.religion
 					fp2_struggle_faith_is_mozarabic_trigger = no
 					NOT = { exists = religious_head }
 				}
@@ -769,8 +761,8 @@ on_minority_system_faith_conversion = {
 		# Faster conversion of infidels for FP2 Council Toledo Conversion
 		if = {
 			limit = {
-				scope:councillor.liege = { has_character_modifier = fp2_council_conversion_modifier }
-				NOT = { scope:county.faith.religion = scope:councillor.liege.religion }
+				scope:councillor_liege = { has_character_modifier = fp2_council_conversion_modifier }
+				NOT = { scope:county.faith.religion = liege.religion }
 			}
 
 			change_local_variable = {
@@ -783,6 +775,335 @@ on_minority_system_faith_conversion = {
 			clever_faith_add = {
 				FAITH = scope:councillor.faith
 				AMOUNT = local_var:temp_conversion_amount
+			}
+			if = {
+				limit = {
+					faith_is_already_in_list = {
+						FAITH = scope:councillor.faith
+					}
+				}
+
+				clever_faith_add = {
+					FAITH = scope:councillor.faith
+					AMOUNT = local_var:temp_conversion_amount
+				}
+			}
+			else = {
+				change_local_variable = {
+					name = temp_conversion_amount
+					add = 1
+				}
+				clever_faith_add = {
+					FAITH = scope:councillor.faith
+					AMOUNT = local_var:temp_conversion_amount
+				}
+			}
+		}
+	}
+}
+
+on_minority_system_culture_conversion = {
+	effect = {
+		set_local_variable = {
+			name = temp_conversion_amount
+			value = random_CULTURE_conversion_value
+		}
+
+		# Court Steward stewardship attributes
+		if = {
+			limit = { scope:councillor.stewardship < 5 }
+
+			change_local_variable = {
+				name = temp_conversion_amount
+				subtract = 0.2
+			}
+		}
+		if = {
+			limit = { scope:councillor.stewardship > 8 }
+
+			change_local_variable = {
+				name = temp_conversion_amount
+				add = add_random_CULTURE_value
+			}
+		}
+		if = {
+			limit = { scope:councillor.stewardship > 12 }
+
+			change_local_variable = {
+				name = temp_conversion_amount
+				add = add_random_CULTURE_value
+			}
+		}
+		if = {
+			limit = { scope:councillor.stewardship > 16 }
+
+			change_local_variable = {
+				name = temp_conversion_amount
+				add = add_random_CULTURE_value
+			}
+		}
+		if = {
+			limit = { scope:councillor.stewardship > 68 }
+
+			change_local_variable = {
+				name = temp_conversion_amount
+				add = add_random_CULTURE_value
+			}
+		}
+		if = {
+			limit = { scope:councillor.stewardship > 69 }
+
+			change_local_variable = {
+				name = temp_conversion_amount
+				add = add_random_CULTURE_value
+			}
+		}
+		
+		if = { # Development reduces the speed. Should be the last non-multiply modifier applied to avoid negative values
+			limit = {
+				exists = scope:county
+				scope:county = {
+					development_level > 0
+				}
+			}
+			change_local_variable = {
+				name = temp_conversion_amount
+				add = scope:county.promote_culture_development_penalty
+			}
+		}
+
+		# Game Rule Culture Conversion Speed
+		if = {
+			limit = {
+				has_game_rule = slower_culture_conversion_speed
+			}
+			change_local_variable = {
+				name = temp_conversion_amount
+				divide = 2
+			}
+		}
+		if = {
+			limit = {
+				has_game_rule = significantly_slower_culture_conversion_speed
+			}
+			change_local_variable = {
+				name = temp_conversion_amount
+				divide = 3
+			}
+		}
+		if = {
+			limit = {
+				has_game_rule = significantly_faster_culture_conversion_speed
+			}
+			change_local_variable = {
+				name = temp_conversion_amount
+				multiply = 2
+			}
+		}
+		if = {
+			limit = {
+				has_game_rule = faster_culture_conversion_speed
+			}
+			change_local_variable = {
+				name = temp_conversion_amount
+				multiply = 3
+			}
+		}
+		# Faster conversion for FP2 Hostility ending, if county is in Iberia and culture was involved
+		if = {
+			limit = {
+				any_in_global_list = {
+					variable = fp2_struggle_ending_culture_list
+					this = scope:county.culture
+				}
+				scope:county.title_province = { geographical_region = world_europe_west_iberia }
+				scope:councillor.liege.house = {
+					OR = {
+						has_house_modifier = fp2_struggle_hostility_house_culture_modifier
+						has_house_modifier = fp2_struggle_hostility_house_combined_modifier
+					}
+				}
+			}
+			change_local_variable = {
+				name = temp_conversion_amount
+				multiply = fp2_struggle_hostility_conversion_value
+			}
+		}
+		if = {
+			limit = {
+				scope:councillor_liege = {
+					has_character_modifier = devoted_to_tradition_modifier
+				}
+			}
+			change_local_variable = {
+				name = temp_conversion_amount
+				multiply = 1.25
+			}
+		}
+
+		scope:county = {
+			if = {
+				limit = {
+					culture_is_already_in_list = {
+						CULTURE = scope:councillor.culture
+					}
+				}
+
+				clever_culture_add = {
+					CULTURE = scope:councillor.culture
+					AMOUNT = local_var:temp_conversion_amount
+				}
+			}
+			else = {
+				change_local_variable = {
+					name = temp_conversion_amount
+					add = 1
+				}
+				clever_culture_add = {
+					CULTURE = scope:councillor.culture
+					AMOUNT = local_var:temp_conversion_amount
+				}
+			}
+		}
+	}
+}
+
+on_minority_system_culture_acceptance = {
+	effect = {
+		scope:county = {
+			every_in_list = {
+				variable = culture_minorities
+
+				limit = { NOT = { this.var:culture = scope:county.culture } }
+
+				set_local_variable = {
+					name = temp_acceptance_add
+					value = this.var:amount
+				}
+				change_local_variable = {
+					name = temp_acceptance_add
+					divide = 100
+				}
+
+				#if = {
+				#	limit = {
+				#		scope:councillor.culture = scope:county.culture
+				#	}
+				#	change_local_variable = {
+				#		name = temp_acceptance_add
+				#		add = scope:councillor.steward_accept_culture_yearly_increase_same_culture_bonus
+				#	}
+				#}
+				
+				if = {
+					limit = {
+						councillor_liege_has_customs_legacy_perk = yes
+					}
+					change_local_variable = {
+						name = temp_acceptance_add
+						add = scope:councillor.steward_accept_culture_customs_bonus_yearly_increase
+					}
+				}
+				
+				if = {
+					limit = {
+						councillor_liege_has_erudition_legacy_5_perk = yes
+					}
+					change_local_variable = {
+						name = temp_acceptance_add
+						add = scope:councillor.steward_accept_culture_erudition_bonus_yearly_increase
+					}
+				}
+		
+				if = {
+					limit = {
+						councillor_liege_has_family_business_bonus = yes
+					}
+					change_local_variable = {
+						name = temp_acceptance_add
+						add = scope:councillor.steward_promote_culture_family_business_bonus
+					}
+				}
+		
+				# Relation Bonuses/Penalties
+				if = { # Friend
+					limit = {
+						scope:councillor_liege = {
+							has_relation_friend = scope:councillor
+							NOT = { has_relation_best_friend = scope:councillor }
+						}
+					}
+					change_local_variable = {
+						name = temp_acceptance_add
+						add = scope:councillor.steward_accept_culture_yearly_increase_friend_bonus
+					}
+				}
+				if = { # Best Friend
+					limit = {
+						scope:councillor_liege = {
+							has_relation_best_friend = scope:councillor
+						}
+					}
+					change_local_variable = {
+						name = temp_acceptance_add
+						add = scope:councillor.steward_accept_culture_yearly_increase_best_friend_bonus
+					}
+				}
+				if = { # Rival
+					limit = {
+						scope:councillor_liege = {
+							has_relation_rival = scope:councillor
+							NOT = { has_relation_nemesis = scope:councillor }
+						}
+					}
+					change_local_variable = {
+						name = temp_acceptance_add
+						add = scope:councillor.steward_accept_culture_yearly_increase_rival_bonus
+					}
+				}
+				if = { # Nemesis
+					limit = {
+						scope:councillor_liege = {
+							has_relation_nemesis = scope:councillor
+						}
+					}
+					change_local_variable = {
+						name = temp_acceptance_add
+						add = scope:councillor.steward_accept_culture_yearly_increase_nemesis_bonus
+					}
+				}
+				#if = { # Independent Ruler
+				#	limit = {
+				#		scope:councillor_liege = {
+				#			is_independent_ruler = yes
+				#		}
+				#	}
+				#	change_local_variable = {
+				#		name = temp_acceptance_add
+				#		add = steward_accept_culture_yearly_increase_independent_bonus
+				#	}
+				#}
+				
+				if = { # Court Type bonus
+					limit = {
+						scope:councillor_liege = {
+							has_royal_court = yes
+							has_court_type = court_administrative
+							court_grandeur_current_level >= 4
+						}
+					}
+					change_local_variable = {
+						name = temp_acceptance_add
+						add = steward_accept_culture_court_type_bonus
+					}
+				}
+				this.var:culture = {
+					change_cultural_acceptance = {
+						target = scope:county.culture
+						value = local_var:temp_acceptance_add
+						desc = STEWARD_PROGRESS_BASE
+					}
+				}
 			}
 		}
 	}

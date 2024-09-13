@@ -1,2 +1,7 @@
 ﻿l_english:
- MINORITIES_no_other_faith_minorities: "There are no [faiths|E] in the [county|E] different from your own [faith|E]."
+ MINORITIES_no_other_faith_minorities: "There are [faiths|E] in the [county|E] different from your own [faith|E]."
+ NOT_MINORITIES_no_other_faith_minorities: "There are no [faiths|E] in the [county|E] different from your own [faith|E]."
+ MINORITIES_no_other_culture_minorities: "There are [cultures|E] in the [county|E] different from your own [culture|E]."
+ NOT_MINORITIES_no_other_culture_minorities: "There are no [cultures|E] in the [county|E] different from your own [culture|E]."
+ MINORITIES_no_not_accepted_culture_minorities: "There are [cultures|E] in the [county|E] that do not completely accept your [culture|E]."
+ NOT_MINORITIES_no_not_accepted_culture_minorities: "There aren't any [cultures|E] in the [county|E] that do not completely accept your [culture|E]."

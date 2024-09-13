@@ -193,7 +193,7 @@ task_conversion = {
 	task_type = task_type_county
 	county_target = realm
 	ai_county_target = realm
-	task_progress = task_progress_percentage
+	task_progress = task_progress_infinite
 	highlight_own_realm = yes
 
 	effect_desc = {

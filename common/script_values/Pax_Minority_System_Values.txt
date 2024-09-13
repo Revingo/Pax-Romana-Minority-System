@@ -21,3 +21,11 @@ random_conversion_value = {
 add_random_value = {
 	value = { 0.2 0.5 }
 }
+
+random_CULTURE_conversion_value = {
+	value = { 0.05 0.5 }
+}
+
+add_random_CULTURE_value = {
+	value = { 0.1 0.25 }
+}

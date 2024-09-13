@@ -1,4 +1,11 @@
 ﻿no_other_faith_minorities = {
 	global = MINORITIES_no_other_faith_minorities
-	#global_not = MINORITIES_no_other_faith_minorities
+}
+
+no_other_culture_minorities = {
+	global = MINORITIES_no_other_culture_minorities
+}
+
+no_not_accepted_culture_minorities = {
+	global = MINORITIES_no_not_accepted_culture_minorities
 }

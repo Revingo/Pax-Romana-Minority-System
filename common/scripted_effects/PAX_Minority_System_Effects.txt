@@ -567,94 +567,40 @@ change_dominant_culture = {
 			}
 		}
 	
-		if = {
-			limit = {
-				AND = {
-					culture_is_already_in_list = {
-						#COUNTY = $COUNTY$
-						CULTURE = scope:county_culture
-					}
-	
-					var:clever_counter > 1
-				}
-				
-			}
-	
-			change_value_of_culture_in_list = {
-				#COUNTY = $COUNTY$
-				CULTURE = scope:county_culture
-				AMOUNT = 50
-			}
-	
-			set_variable = {
-				name = clever_subtract
-				value = {
-					value = 50
-					divide = {
-						value = var:clever_counter
-						subtract = 1
-					}
-				}
-			}
-	
-			every_in_list = {
-				variable = culture_minorities
-		
-				limit = { NOT = { var:culture = scope:county_culture } }
-	
-				change_variable = {
-					name = amount
-					subtract = scope:county_dominant_to_change.var:clever_subtract
-				}
-			}
-	
-			remove_variable = clever_subtract
+		culture_story_cycle_create = {
+			COUNTY = scope:county_dominant_to_change
+			CULTURE = scope:county_culture
+			AMOUNT = 65
 		}
-		else_if = {
 	
-			limit = {
-				NOT = {
-					culture_is_already_in_list = {
-						#COUNTY = $COUNTY$
-						CULTURE = scope:county_culture
+		every_in_list = {
+			variable = culture_minorities
+	
+			save_scope_as = current_county_amount_edit
+		
+			limit = { NOT = { var:culture = scope:county_culture } }
+		
+			scope:county_dominant_to_change = {
+				set_variable = {
+					name = clever_subtract
+					value = {
+						value = scope:current_county_amount_edit.var:amount
+						multiply = 50
+						divide = 100
 					}
 				}
 			}
 	
-			culture_story_cycle_create = {
-				COUNTY = scope:county_dominant_to_change
-				CULTURE = scope:county_culture
-				AMOUNT = 50
+			change_variable = {
+				name = amount
+				subtract = scope:county_dominant_to_change.var:clever_subtract
 			}
 	
-			every_in_list = {
-				variable = culture_minorities
-	
-				save_scope_as = current_county_amount_edit
-		
-				limit = { NOT = { var:culture = scope:county_culture } }
-		
-				scope:county_dominant_to_change = {
-					set_variable = {
-						name = clever_subtract
-						value = {
-							value = scope:current_county_amount_edit.var:amount
-							multiply = 50
-							divide = 100
-						}
-					}
-				}
-	
-				change_variable = {
-					name = amount
-					subtract = scope:county_dominant_to_change.var:clever_subtract
-				}
-	
-				scope:county_dominant_to_change = {
-					remove_variable = clever_subtract
-				}
+			scope:county_dominant_to_change = {
+				remove_variable = clever_subtract
 			}
 		}
+		
 	
 		fix_culture_list = yes
 	
@@ -741,90 +687,37 @@ change_dominant_faith = {
 			}
 		}
 	
-		if = {
-			limit = {
-				AND = {
-					faith_is_already_in_list = {
-						#COUNTY = $COUNTY$
-						FAITH = scope:county_faith
-					}
-	
-					var:clever_counter > 1
-				}
-			}
-	
-			change_value_of_faith_in_list = {
-				#COUNTY = $COUNTY$
-				FAITH = scope:county_faith
-				AMOUNT = 50
-			}
-	
-			set_variable = {
-				name = clever_subtract
-				value = {
-					value = 50
-					divide = {
-						value = var:clever_counter
-						subtract = 1
-					}
-				}
-			}
-	
-			every_in_list = {
-				variable = faith_minorities
-		
-				limit = { NOT = { var:faith = scope:county_faith } }
-	
-				change_variable = {
-					name = amount
-					subtract = scope:county_dominant_to_change.var:clever_subtract
-				}
-			}
-	
-			remove_variable = clever_subtract
+		faith_story_cycle_create = {
+			COUNTY = scope:county_dominant_to_change
+			FAITH = scope:county_faith
+			AMOUNT = 65
 		}
-		else_if = {
-			limit = {
-				NOT = {
-					faith_is_already_in_list = {
-						#COUNTY = $COUNTY$
-						FAITH = scope:county_faith
+	
+		every_in_list = {
+			variable = faith_minorities
+		
+			save_scope_as = current_county_amount_edit
+		
+			limit = { NOT = { var:faith = scope:county_faith } }
+		
+			scope:county_dominant_to_change = {
+				set_variable = {
+					name = clever_subtract
+					value = {
+						value = scope:current_county_amount_edit.var:amount
+						multiply = 50
+						divide = 100
 					}
 				}
 			}
 	
-			faith_story_cycle_create = {
-				COUNTY = scope:county_dominant_to_change
-				FAITH = scope:county_faith
-				AMOUNT = 50
+			change_variable = {
+				name = amount
+				subtract = scope:county_dominant_to_change.var:clever_subtract
 			}
 	
-			every_in_list = {
-				variable = faith_minorities
-		
-				save_scope_as = current_county_amount_edit
-		
-				limit = { NOT = { var:faith = scope:county_faith } }
-		
-				scope:county_dominant_to_change = {
-					set_variable = {
-						name = clever_subtract
-						value = {
-							value = scope:current_county_amount_edit.var:amount
-							multiply = 50
-							divide = 100
-						}
-					}
-				}
-	
-				change_variable = {
-					name = amount
-					subtract = scope:county_dominant_to_change.var:clever_subtract
-				}
-	
-				scope:county_dominant_to_change = {
-					remove_variable = clever_subtract
-				}
+			scope:county_dominant_to_change = {
+				remove_variable = clever_subtract
 			}
 		}
 	
@@ -987,7 +880,7 @@ neighboring_counties_new_culture = {
 
 		clever_culture_add = {
 			CULTURE = $CULTURE$
-			AMOUNT = 10
+			AMOUNT = 20
 		}
 	}
 }
@@ -1009,7 +902,7 @@ neighboring_counties_new_faith = {
 
 		clever_faith_add = {
 			FAITH = $FAITH$
-			AMOUNT = 10
+			AMOUNT = 20
 		}
 	}
 }
