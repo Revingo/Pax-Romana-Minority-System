@@ -18,4 +18,4 @@ If you want to change the specific amount of culture and faith minorities of spe
 - Now open the file "PAX_custom_minorities.txt" and edit it following the instructions written inside
 - In the load order this mod should go before your mod, so that your mod can overwrite the file
 
-# JOIN OUR DISCORD! -> https://discord.com/channels/735413460439007241/735413460766163110/1280506912986894458
+# JOIN OUR DISCORD! -> https://discord.gg/eTKvAJkdR6
