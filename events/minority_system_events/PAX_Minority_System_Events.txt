@@ -1,0 +1,306 @@
+﻿namespace = minority_system_e
+
+minority_system_e.001 = {
+	hidden = yes
+
+	trigger = {
+		any_realm_county = {
+			any_in_list = {
+				variable = culture_minorities
+
+				OR = {
+					NOT = { this.var:culture = prev.culture }
+					NOT = { prev.culture = root.culture }
+				}
+				
+				this.var:amount > 30
+			}
+		}
+	}
+
+	immediate = {
+		random_realm_county = {
+			limit = {
+				any_in_list = {
+					variable = culture_minorities
+	
+					OR = {
+						NOT = { this.var:culture = prev.culture }
+						NOT = { prev.culture = root.culture }
+					}
+					
+					this.var:amount > 30
+				}
+			}
+
+			save_scope_as = county_scope
+
+			if = {
+				limit = {
+					any_in_list = {
+						variable = culture_minorities
+	
+						this.var:culture = {
+							cultural_acceptance = {
+								target = scope:county_scope.culture
+								value < 40
+							}
+						}
+
+						OR = {
+							NOT = { this.var:culture = prev.culture }
+							NOT = { prev.culture = root.culture }
+						}
+						
+						this.var:amount > 30
+					}
+				}
+
+				add_county_modifier = {
+					modifier = culture_clash
+					years = 1
+				}
+	
+				root = {
+					send_interface_message = {
+						type = event_steward_task_bad
+	
+						title = minority_system_e.001.title
+						desc = minority_system_e.001.desc
+	
+						left_icon = scope:county_scope
+					}
+				}
+			}
+		}
+	}
+}
+
+minority_system_e.002 = {
+	hidden = yes
+
+	trigger = {
+		any_realm_county = {
+			any_in_list = {
+				variable = culture_minorities
+
+				OR = {
+					NOT = { this.var:culture = prev.culture }
+					NOT = { prev.culture = root.culture }
+				}
+				
+				this.var:amount > 30
+			}
+		}
+	}
+
+	immediate = {
+		random_realm_county = {
+			limit = {
+				any_in_list = {
+					variable = culture_minorities
+	
+					OR = {
+						NOT = { this.var:culture = prev.culture }
+						NOT = { prev.culture = root.culture }
+					}
+					
+					this.var:amount > 30
+				}
+			}
+
+			save_scope_as = county_scope
+
+			if = {
+				limit = {
+					any_in_list = {
+						variable = culture_minorities
+
+						OR = {
+							NOT = { this.var:culture = prev.culture }
+							NOT = { prev.culture = root.culture }
+						}
+	
+						this.var:culture = {
+							cultural_acceptance = {
+								target = scope:county_scope.culture
+								value > 70
+							}
+						}
+
+						this.var:amount > 30
+					}
+				}
+
+				add_county_modifier = {
+					modifier = culture_collaboration
+					years = 1
+				}
+	
+				root = {
+					send_interface_message = {
+						type = event_steward_task_good
+	
+						title = minority_system_e.002.title
+						desc = minority_system_e.003.desc
+	
+						left_icon = scope:county_scope
+					}
+				}
+			}
+		}
+	}
+}
+
+minority_system_e.003 = {
+	hidden = yes
+
+	trigger = {
+		any_realm_county = {
+			any_in_list = {
+				variable = faith_minorities
+
+				OR = {
+					NOT = { this.var:faith = prev.faith }
+					NOT = { prev.faith = root.faith }
+				}
+				
+				this.var:amount > 30
+			}
+		}
+	}
+
+	immediate = {
+		random_realm_county = {
+			save_scope_as = county_scope
+			limit = {
+				any_in_list = {
+					variable = faith_minorities
+	
+					OR = {
+						NOT = { this.var:faith = prev.faith }
+						NOT = { prev.faith = root.faith }
+					}
+					
+					this.var:amount > 30
+				}
+			}
+
+			if = {
+				limit = {
+					any_in_list = {
+						variable = faith_minorities
+
+						this.var:faith = {
+							faith_hostility_level  = {
+								target = scope:county_scope.faith
+								value < 2
+							}
+						}
+
+						OR = {
+							NOT = { this.var:faith = prev.faith }
+							NOT = { prev.faith = root.faith }
+						}
+						
+						this.var:amount > 30
+					}
+				}
+
+				add_county_modifier = {
+					modifier = faith_clash
+					years = 1
+				}
+	
+				root = {
+					send_interface_message = {
+						type = event_steward_task_bad
+	
+						title = minority_system_e.003.title
+						desc = minority_system_e.003.desc
+	
+						left_icon = scope:county_scope
+					}
+				}
+			}
+
+			
+		}
+	}
+}
+
+minority_system_e.004 = {
+	hidden = yes
+
+	trigger = {
+		any_realm_county = {
+			any_in_list = {
+				variable = faith_minorities
+
+				OR = {
+					NOT = { this.var:faith = prev.faith }
+					NOT = { prev.faith = root.faith }
+				}
+				
+				this.var:amount > 30
+			}
+		}
+	}
+
+	immediate = {
+		random_realm_county = {
+			limit = {
+				any_in_list = {
+					variable = faith_minorities
+	
+					OR = {
+						NOT = { this.var:faith = prev.faith }
+						NOT = { prev.faith = root.faith }
+					}
+					
+					this.var:amount > 30
+				}
+			}
+
+			save_scope_as = county_scope
+
+			if = {
+				limit = {
+					any_in_list = {
+						variable = faith_minorities
+	
+						this.var:faith = {
+							faith_hostility_level  = {
+								target = scope:county_scope.faith
+								value > 1
+							}
+						}
+
+						OR = {
+							NOT = { this.var:faith = prev.faith }
+							NOT = { prev.faith = root.faith }
+						}
+						
+						this.var:amount > 30
+					}
+				}
+
+				add_county_modifier = {
+					modifier = faith_conciliation
+					years = 1
+				}
+	
+				root = {
+					send_interface_message = {
+						type = event_steward_task_good
+	
+						title = minority_system_e.004.title
+						desc = minority_system_e.004.desc
+	
+						left_icon = scope:county_scope
+					}
+				}
+			}
+		}
+	}
+}

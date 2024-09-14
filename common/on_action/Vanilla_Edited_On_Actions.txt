@@ -50,3 +50,8 @@ quarterly_playable_pulse = {
 		on_minorities_check
 	}
 }
+on_yearly_events = {
+	on_actions = {
+		on_minority_events
+	}
+}

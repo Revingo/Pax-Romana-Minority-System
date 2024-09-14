@@ -15,17 +15,17 @@ average_neighboring_counties_when_sieged = {
 }
 
 random_conversion_value = {
-	value = { 0.1 1 }
+	value = { 0.15 1.50 }
 }
 
 add_random_value = {
-	value = { 0.2 0.5 }
+	value = { 0.3 0.65 }
 }
 
 random_CULTURE_conversion_value = {
-	value = { 0.05 0.5 }
+	value = { 0.07 0.65 }
 }
 
 add_random_CULTURE_value = {
-	value = { 0.1 0.25 }
+	value = { 0.15 0.35 }
 }
