@@ -4,7 +4,7 @@ minority_system_e.001 = {
 	hidden = yes
 
 	trigger = {
-		any_realm_county = {
+		any_sub_realm_county = {
 			any_in_list = {
 				variable = culture_minorities
 
@@ -19,7 +19,7 @@ minority_system_e.001 = {
 	}
 
 	immediate = {
-		random_realm_county = {
+		random_sub_realm_county = {
 			limit = {
 				any_in_list = {
 					variable = culture_minorities
@@ -80,7 +80,7 @@ minority_system_e.002 = {
 	hidden = yes
 
 	trigger = {
-		any_realm_county = {
+		any_sub_realm_county = {
 			any_in_list = {
 				variable = culture_minorities
 
@@ -95,7 +95,7 @@ minority_system_e.002 = {
 	}
 
 	immediate = {
-		random_realm_county = {
+		random_sub_realm_county = {
 			limit = {
 				any_in_list = {
 					variable = culture_minorities
@@ -142,7 +142,7 @@ minority_system_e.002 = {
 						type = event_steward_task_good
 	
 						title = minority_system_e.002.title
-						desc = minority_system_e.003.desc
+						desc = minority_system_e.002.desc
 	
 						left_icon = scope:county_scope
 					}
@@ -156,7 +156,7 @@ minority_system_e.003 = {
 	hidden = yes
 
 	trigger = {
-		any_realm_county = {
+		any_sub_realm_county = {
 			any_in_list = {
 				variable = faith_minorities
 
@@ -171,7 +171,7 @@ minority_system_e.003 = {
 	}
 
 	immediate = {
-		random_realm_county = {
+		random_sub_realm_county = {
 			save_scope_as = county_scope
 			limit = {
 				any_in_list = {
@@ -214,7 +214,7 @@ minority_system_e.003 = {
 	
 				root = {
 					send_interface_message = {
-						type = event_steward_task_bad
+						type = event_court_chaplain_task_bad
 	
 						title = minority_system_e.003.title
 						desc = minority_system_e.003.desc
@@ -233,7 +233,7 @@ minority_system_e.004 = {
 	hidden = yes
 
 	trigger = {
-		any_realm_county = {
+		any_sub_realm_county = {
 			any_in_list = {
 				variable = faith_minorities
 
@@ -248,7 +248,7 @@ minority_system_e.004 = {
 	}
 
 	immediate = {
-		random_realm_county = {
+		random_sub_realm_county = {
 			limit = {
 				any_in_list = {
 					variable = faith_minorities
@@ -292,7 +292,7 @@ minority_system_e.004 = {
 	
 				root = {
 					send_interface_message = {
-						type = event_steward_task_good
+						type = event_court_chaplain_task_good
 	
 						title = minority_system_e.004.title
 						desc = minority_system_e.004.desc

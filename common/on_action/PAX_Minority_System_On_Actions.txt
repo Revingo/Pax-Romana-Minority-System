@@ -1,4 +1,11 @@
-﻿on_game_start_minorities_setup = {
+﻿#########################################################################################################
+# This script has been done by Damn.Broh! You can reuse it without asking, just credit him!
+#########################################################################################################
+
+
+# This on action is used at the start of the game. It sets up all tthe county cultures and faiths based on their dominant culture/faith, the dominant culture/faith
+# of their neighboring counties and the culture/faith of their holder
+on_game_start_minorities_setup = {
 	effect = {
 		every_county = {
 			save_scope_as = current_county
@@ -148,10 +155,6 @@
 
 			fix_culture_list = yes
 
-			#remove_variable = counter
-
-			#remove_variable = percentage_amount
-
 			clear_variable_list = to_add_cultures
 
 			clear_variable_list = to_add_faiths
@@ -169,6 +172,7 @@
 	}
 }
 
+# When a culture diverges from the main one or is hybridazied, this on action gives a 65% to every counties of this culture + 15% to all of their neighboring counties
 on_new_culture_minority_system = {
 	effect = {
 		save_scope_as = new_culture
@@ -186,6 +190,7 @@ on_new_culture_minority_system = {
 	}
 }
 
+# Same as on_new_culture_minority_system but for newly created faiths
 on_new_faith_minority_system = {
 	effect = {
 		faith = {
@@ -210,6 +215,8 @@ on_new_faith_minority_system = {
 	}
 }
 
+# When someone loses a war, then people of his culture inside his realm emigrate to other realms. The winner instead kills a good amount of people
+# of the loser's culture inside his own realm.
 on_culture_shift_attacker_won_war = {
 	effect = {
 
@@ -229,8 +236,8 @@ on_culture_shift_attacker_won_war = {
 			scope:defender = {
 				realm_culture_emigration = {
 					CULTURE = scope:attacker.culture
-					AMOUNT = -1
-					EMIGRATION_AMOUNT = 2
+					AMOUNT = -0.5
+					EMIGRATION_AMOUNT = 1
 				}
 			}
 		}
@@ -265,8 +272,8 @@ on_culture_shift_defender_won_war = {
 			scope:attacker = {
 				realm_culture_emigration = {
 					CULTURE = scope:attacker.culture
-					AMOUNT = -1
-					EMIGRATION_AMOUNT = 2
+					AMOUNT = -0.5
+					EMIGRATION_AMOUNT = 1
 				}
 			}
 		}
@@ -282,6 +289,7 @@ on_culture_shift_defender_won_war = {
 	}
 }
 
+# When a county gets sieged, then people of the dominant culture of that county emigrate to neighboring counties.
 on_county_culture_shift_gets_sieged = {
 	effect = {
 		scope:barony.county = {
@@ -308,6 +316,7 @@ on_county_culture_shift_gets_sieged = {
 	}
 }
 
+# If a faith has a very low fervor, then people start converting to other faiths
 on_low_fervor_other_faiths_increase = {
 	effect = {
 		every_realm_county = {
@@ -337,6 +346,7 @@ on_low_fervor_other_faiths_increase = {
 	}
 }
 
+# The more a ruler gets in debt, the more people of his own culture start to emigrate to neighboring counties in search of places with less debts
 on_ruler_in_debt_culture_decrease = {
 	effect = {
 		save_scope_as = realm_holder
@@ -422,6 +432,8 @@ on_ruler_in_debt_culture_decrease = {
 	}
 }
 
+# If a ruler is a sinner, then people inside his realm start to convert to other faiths, while if he has high piety level, more people follow
+# his lead converting to his faith
 on_ruler_piety_level_faith_change = {
 	effect = {
 		save_scope_as = realm_holder
@@ -505,6 +517,7 @@ on_ruler_piety_level_faith_change = {
 	}
 }
 
+# This on action checks that al the minorities lists inside all the counties in the realm have no errors
 on_minorities_check = {
 	effect = {
 		every_realm_county = {
@@ -519,6 +532,7 @@ on_minorities_check = {
 	}
 }
 
+# on action performed when the court chapelain converts a county
 on_minority_system_faith_conversion = {
 	effect = {
 		set_local_variable = {
@@ -635,16 +649,17 @@ on_minority_system_faith_conversion = {
 						has_house_modifier = fp2_struggle_hostility_house_combined_modifier
 					}
 				}
-				any_in_global_list = {
-					variable = fp2_struggle_ending_faith_list
-					
-					scope:county = {
-						any_in_list = {
-							variable = faith_minorities
+				scope:county = {
+					any_in_list = {
+						variable = faith_minorities
 
-							this.var:faith = prev.prev
-							this.var:amount > 30
+						any_in_global_list = {
+							variable = fp2_struggle_ending_faith_list
+
+							this = prev.var:faith
 						}
+
+						this.var:amount > 30
 					}
 				}
 				scope:county.title_province = { geographical_region = world_europe_west_iberia }
@@ -805,6 +820,7 @@ on_minority_system_faith_conversion = {
 	}
 }
 
+# on action performed when the court steward converts a county
 on_minority_system_culture_conversion = {
 	effect = {
 		set_local_variable = {
@@ -974,6 +990,7 @@ on_minority_system_culture_conversion = {
 	}
 }
 
+# on action performed when the court chapelain increases the culture acceptance inside a county
 on_minority_system_culture_acceptance = {
 	effect = {
 		scope:county = {
@@ -1118,10 +1135,11 @@ on_minority_system_culture_acceptance = {
 	}
 }
 
+# random possible events that could happen every year
 on_minority_events = {
 	random_events = {
 		#chance_to_happen = 20
-		#30 = 0
+		25 = 0
 		40 = minority_system_e.001
 		40 = minority_system_e.002
 		40 = minority_system_e.003
@@ -1129,12 +1147,7 @@ on_minority_events = {
 	}
 }
 
-on_custom_faith_culture_minority_add = {
-	effect = {
-
-	}
-}
-
+# on action used for tests
 test_on_action_minority = {
 	effect = {
 		every_county = {

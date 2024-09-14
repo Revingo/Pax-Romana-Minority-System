@@ -1,0 +1,26 @@
+﻿
+# Are you a modder? Then this on action is made for you!
+# Do you feel the need to customize further the faith or cultural minorities at the start of the game instead of using the default calculation?
+# Then this on action is used for just that.
+# Use the "clever_culture_add" or "clever_faith_add" effects as shown in the example to change the minorities of the single counties just the way you need!
+on_custom_faith_culture_minority_add = {
+	effect = {
+		# EXAMPLE:
+		#
+		# [This effect adds the Roman culture to the county of Cumberland minorities with a value of 54.3%]
+		# title:c_cumberland = {
+		#	 clever_culture_add = {
+		#		CULTURE = culture:roman
+		#		AMOUNT = 54.3
+		#	 }
+		# }
+		#
+		# [This effect adds the Mazdakism faith to the county of Cumberland minorities with a value of 32.256%]
+		# title:c_cumberland = {
+		#	 clever_faith_add = {
+		#		FAITH = faith:mazdakism
+		#		AMOUNT = 32.256
+		#	 }
+		# }
+	}
+}

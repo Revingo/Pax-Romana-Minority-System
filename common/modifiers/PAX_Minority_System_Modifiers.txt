@@ -2,24 +2,28 @@
 	icon = family_negative
 
 	tax_mult = -0.2
-	monthly_county_control_decline_factor = 0.5
+	monthly_county_control_growth_add = -5
+	monthly_county_control_growth_factor = -0.5
 }
 
 culture_collaboration = {
 	icon = family_positive
 
 	tax_mult = 0.2
+	monthly_county_control_growth_add = 5
 	monthly_county_control_growth_factor = 0.5
 }
 
 faith_clash = {
 	icon = piety_negative
 
-	monthly_county_control_decline_factor = 0.65
+	monthly_county_control_growth_add = -5
+	monthly_county_control_growth_factor = -0.65
 }
 
 faith_conciliation = {
 	icon = piety_positive
 
+	monthly_county_control_growth_add = 5
 	monthly_county_control_growth_factor = 0.65
 }

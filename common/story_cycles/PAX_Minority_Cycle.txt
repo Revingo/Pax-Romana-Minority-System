@@ -1,4 +1,6 @@
-﻿minority_system_story_cycle = {
+﻿
+# Very simple story cycle
+minority_system_story_cycle = {
 	on_setup = {
 	}
 

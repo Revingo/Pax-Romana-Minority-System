@@ -7,13 +7,13 @@
  NOT_MINORITIES_no_not_accepted_culture_minorities: "There aren't any [cultures|E] in the [county|E] that do not completely accept your [culture|E]."
 
  culture_clash: "Culture Clash"
- culture_clash_desc: "The tension between the [cultures|E] of this [county|E] has reached unacceptable levels and reached a level where violence and constant fights are the only option."
+ culture_clash_desc: "The tension between the [cultures|E] of this [county|E] has reached unacceptable levels, where violence and constant fights are the only options."
  culture_collaboration: "Cultural Collaboration"
- culture_collaboration_desc: "The [cultures|E] of this [county|E] have put aside their differences and have started collaborating between each other for the greater good."
+ culture_collaboration_desc: "The [cultures|E] of this [county|E] have put aside their differences and have started collaborating with each other for the greater good."
  faith_clash: "Faith Clash"
- faith_clash_desc: "People of different [faith|E] inside this [county|E] are fighting against each other for dominance over the region."
+ faith_clash_desc: "People of different [faiths|E] in this [county|E] are fighting against each other for dominance over the region."
  faith_conciliation: "Faith Conciliation"
- faith_conciliation_desc: "People of different [faith|E] inside this [county|E] are collaborating with each other independently from their own believes."
+ faith_conciliation_desc: "People of different [faiths|E] in this [county|E] are collaborating with each other regardless of their own beliefs."
 
  minority_system_e.001.title: "$culture_clash$"
  minority_system_e.001.desc: "$culture_clash_desc$"

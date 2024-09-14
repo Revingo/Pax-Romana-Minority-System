@@ -1,4 +1,11 @@
-﻿culture_story_cycle_create = {
+﻿#########################################################################################################
+# This script has been done by Damn.Broh! You can reuse it without asking, just credit him!
+#########################################################################################################
+
+# This effect creates a story cycle inside a random ruler. It is not important the ruler as the story cycle is used as a very symple structure.
+# This one has two variables assigned to hit: culture, which liks to a culture scope and amount, which links to a floating point value that represents the percentage of that culture inside the county.
+# Then it adds the story cycle to the variable list of the county
+culture_story_cycle_create = {
 	random_ruler = {
 
 		create_story = {
@@ -27,6 +34,7 @@
 	}
 }
 
+# Same as culture_story_cycle_create but with the faith variable instead of the culture variable, which links to a faith scope
 faith_story_cycle_create = {
 	random_ruler = {
 
@@ -56,6 +64,7 @@ faith_story_cycle_create = {
 	}
 }
 
+# This effect is used to change the value variable of a culture story cycle
 change_value_of_culture_in_list = {
 	#$COUNTY$ = {
 		every_in_list = {
@@ -73,6 +82,7 @@ change_value_of_culture_in_list = {
 	#}
 }
 
+# Same as change_value_of_culture_in_list but for faiths
 change_value_of_faith_in_list = {
 	#$COUNTY$ = {
 		every_in_list = {
@@ -90,6 +100,7 @@ change_value_of_faith_in_list = {
 	#}
 }
 
+# This effect removes the story cycle with the culture variable given as input from the culture_minorities list
 remove_culture_in_list = {
 	$COUNTY$ = {
 		every_in_list = {
@@ -111,6 +122,7 @@ remove_culture_in_list = {
 	}
 }
 
+# This effect removes the story cycle with the faith variable given as input from the faith_minorities list
 remove_faith_in_list = {
 	$COUNTY$ = {
 		every_in_list = {
@@ -132,6 +144,8 @@ remove_faith_in_list = {
 	}
 }
 
+# This effect checks if the a story cycle with the given culture is already in list. If that the case, then it changes it's amount variable
+# using the amount given as input. If there is no story cycle of the given culture in list, then it creates a new one with the amount given as input
 START_GAME_culture_story_cycle_create = {
 	$COUNTY$ = {
 		if = {
@@ -158,6 +172,7 @@ START_GAME_culture_story_cycle_create = {
 	}
 }
 
+# Same as START_GAME_culture_story_cycle_create but for faiths
 START_GAME_faith_story_cycle_create = {
 	$COUNTY$ = {
 		if = {
@@ -184,6 +199,8 @@ START_GAME_faith_story_cycle_create = {
 	}
 }
 
+# This effect makes sure that the sum of all the amount variables of the story cycles inside the culture_minorities list is not less or more then 100
+# Then uses another effect to remove any story cycle with an amount variable with a value lower than 1
 fix_culture_list = {
 	save_scope_as = county_to_fix
 
@@ -225,6 +242,7 @@ fix_culture_list = {
 	small_culture_minorities_remover = yes
 }
 
+# Same as fix_culture_list but for faiths
 fix_faith_list = {
 	save_scope_as = county_to_fix
 
@@ -266,6 +284,9 @@ fix_faith_list = {
 	small_faith_minorities_remover = yes
 }
 
+# This effect is the backbone of the Minority System. It adds (or decreases) any culture and amount given as input to the culture_minorities list. It automatically changes all
+# the amount of the other story cycles to make sure that their sum is no more or less than 100. Uses the fix_culture_list effect aswell and checks if with all of these changes
+# the new dominat culture of the county has changed. If that's the case, it changes it.
 clever_culture_add = {
 	save_scope_as = county_add
 
@@ -381,6 +402,7 @@ clever_culture_add = {
 	change_dominant_culture = yes
 }
 
+# Same as clever_culture_add but for faiths
 clever_faith_add = {
 	save_scope_as = county_add
 
@@ -494,6 +516,10 @@ clever_faith_add = {
 	change_dominant_faith = yes
 }
 
+# This effect checks if the Dominant Culture of the county should be changed or not. If it should, then it changes it with the correct one.
+# Sometimes the game changes the culture of the county throught events and decisions though, so instead of changing every single one of those instances,
+# it automatically detects the error, logs it to the error log and solves it, using part of the clever_culture_add effect to add that culture to the
+# culture_minorities list.
 change_dominant_culture = {
 	save_scope_as = county_dominant_to_change
 
@@ -601,7 +627,6 @@ change_dominant_culture = {
 			}
 		}
 		
-	
 		fix_culture_list = yes
 	
 		remove_variable = clever_counter
@@ -614,6 +639,7 @@ change_dominant_culture = {
 	}
 }
 
+# Same as change_dominant_culture but for faiths
 change_dominant_faith = {
 	save_scope_as = county_dominant_to_change
 
@@ -733,6 +759,7 @@ change_dominant_faith = {
 	}
 }
 
+# If a culture has an amount that is less than 1, then this effect removes it from the culture_minorities list
 small_culture_minorities_remover = {
 	save_scope_as = county_small_minorities_remove
 
@@ -782,6 +809,7 @@ small_culture_minorities_remover = {
 	}
 }
 
+# Same as small_culture_minorities_remover but for faiths
 small_faith_minorities_remover = {
 	save_scope_as = county_small_minorities_remove
 
@@ -831,21 +859,8 @@ small_faith_minorities_remover = {
 	}
 }
 
-war_culture_add = {
-	if = {
-		limit = {
-			any_realm_county = {
-				any_in_list = {
-					variable = culture_minorities
-	
-					var:culture = $CULTURE$
-				}
-			}
-			
-		}
-	}
-}
-
+# This effect is used to simulate cultural emigration from a county to another. It removes the specified amount of a culture in the culture_minorities list
+# and adds it to the neicghboring realm's counties with another specified amount.
 realm_culture_emigration = {
 
 	every_realm_county = {
@@ -863,6 +878,7 @@ realm_culture_emigration = {
 	}
 }
 
+# Adds a small amount of a newly created culture to all the counties neighboring them
 neighboring_counties_new_culture = {
 
 	every_neighboring_county = {
@@ -885,6 +901,7 @@ neighboring_counties_new_culture = {
 	}
 }
 
+# Same as neighboring_counties_new_culture but for faiths
 neighboring_counties_new_faith = {
 
 	every_neighboring_county = {
