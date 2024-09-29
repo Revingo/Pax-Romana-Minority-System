@@ -36,6 +36,12 @@ on_siege_completion = {
 	}
 }
 
+on_raid_action_completion = {
+	on_actions = {
+		on_county_culture_shift_gets_raided
+	}
+} 
+
 yearly_playable_pulse = {
 	on_actions = {
 		on_low_fervor_other_faiths_increase

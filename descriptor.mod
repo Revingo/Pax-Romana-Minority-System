@@ -1,9 +1,8 @@
-version="1.0.0"
+version="1.1.0"
 tags={
 	"Culture"
 	"Religion"
 	"Gameplay"
-	"Decisions"
 }
 name="Pax Romana Minority System"
 supported_version="1.13.*"

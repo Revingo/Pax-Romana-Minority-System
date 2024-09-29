@@ -10,7 +10,7 @@ corrected_percentage_value_calculation = {
 }
 
 average_neighboring_counties_when_sieged = {
-	value = 10
+	value = 5
 	divide = scope:barony.county.var:counter
 }
 
