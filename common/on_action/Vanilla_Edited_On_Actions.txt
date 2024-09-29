@@ -47,6 +47,7 @@ yearly_playable_pulse = {
 		on_low_fervor_other_faiths_increase
 		on_ruler_in_debt_culture_decrease
 		on_ruler_piety_level_faith_change
+		on_ruler_prestige_level_culture_change
 		#on_minorities_check
 	}
 }

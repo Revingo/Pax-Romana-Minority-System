@@ -548,6 +548,91 @@ on_ruler_piety_level_faith_change = {
 	}
 }
 
+# If a ruler is disgraced, then people inside his realm start to convert to other cultures, while if he has high prestige level, more people follow
+# his lead converting to his cultrure
+on_ruler_prestige_level_culture_change = {
+	effect = {
+		save_scope_as = realm_holder
+
+		set_local_variable = {
+			name = temp_amount
+			value = 0
+		}
+
+		if = {
+			limit = {
+				AND = {
+					prestige_level = 0
+
+					any_culture_minority_in_realm = {
+						CULTURE = scope:realm_holder.culture
+					}
+				}
+			}
+
+			change_local_variable = {
+				name = temp_amount
+				add = -1
+			}
+
+			every_realm_county = {
+				clever_culture_add = {
+					CULTURE = scope:realm_holder.culture
+					AMOUNT = local_var:temp_amount
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				prestige_level > 1
+			}
+
+			change_local_variable = {
+				name = temp_amount
+				add = 0.2
+			}
+
+			if = {
+				limit = {
+					prestige_level > 2
+				}
+
+				change_local_variable = {
+					name = temp_amount
+					add = 0.2
+				}
+			}
+			if = {
+				limit = {
+					prestige_level > 3
+				}
+
+				change_local_variable = {
+					name = temp_amount
+					add = 0.5
+				}
+			}
+			if = {
+				limit = {
+					prestige_level > 4
+				}
+
+				change_local_variable = {
+					name = temp_amount
+					add = 0.75
+				}
+			}
+
+			every_realm_county = {
+				clever_culture_add = {
+					CULTURE = scope:realm_holder.culture
+					AMOUNT = local_var:temp_amount
+				}
+			}
+		}
+	}
+}
+
 # This on action checks that al the minorities lists inside all the counties in the realm have no errors
 on_minorities_check = {
 	effect = {
@@ -793,7 +878,9 @@ on_minority_system_faith_conversion = {
 				scope:councillor_liege = { has_character_modifier = fp2_council_conversion_modifier }
 				scope:county.faith = {
 					religion = liege.religion
-					fp2_struggle_faith_is_mozarabic_trigger = no
+					NOT = {
+						portrait_religious_faith_or_foundational_trigger = { FAITH = faith:mozarabic_church }
+					}
 					NOT = { exists = religious_head }
 				}
 			}
