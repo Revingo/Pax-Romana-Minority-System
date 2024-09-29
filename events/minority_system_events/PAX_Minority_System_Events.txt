@@ -63,7 +63,7 @@ minority_system_e.001 = {
 	
 				root = {
 					send_interface_message = {
-						type = event_steward_task_bad
+						type = msg_culture_conversion
 	
 						title = minority_system_e.001.title
 						desc = minority_system_e.001.desc
@@ -139,7 +139,7 @@ minority_system_e.002 = {
 	
 				root = {
 					send_interface_message = {
-						type = event_steward_task_good
+						type = msg_culture_conversion
 	
 						title = minority_system_e.002.title
 						desc = minority_system_e.002.desc
@@ -214,7 +214,7 @@ minority_system_e.003 = {
 	
 				root = {
 					send_interface_message = {
-						type = event_court_chaplain_task_bad
+						type = msg_chancellor_task_bad
 	
 						title = minority_system_e.003.title
 						desc = minority_system_e.003.desc
@@ -292,7 +292,7 @@ minority_system_e.004 = {
 	
 				root = {
 					send_interface_message = {
-						type = event_court_chaplain_task_good
+						type = msg_chancellor_task_good
 	
 						title = minority_system_e.004.title
 						desc = minority_system_e.004.desc

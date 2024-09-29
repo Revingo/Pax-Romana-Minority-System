@@ -671,6 +671,8 @@ window = {
 						}
 					}
 				}
+
+				
 			}
 		}
 
@@ -1086,6 +1088,32 @@ window = {
 			}
 
 			expand = {}
+
+			button_round = {
+				name = "move_domcicle_button"
+				datacontext = "[GetPlayer.GetDomicile]"
+				datacontext = "[HoldingView.GetProvince]"
+				visible = "[IsLandlessAdventurer( GetPlayer )]"
+				widgetid = "move_domcicle_button"
+				size = { 40 40 }
+
+				enabled = "[Domicile.CanMoveTo( Province.Self )]"
+				onclick = "[OpenGameViewData( 'move_domicile_planner', Province.Self )]"
+
+				tooltip = "[Domicile.GetType.GetMoveTooltip( Character.Self )]"
+				tooltip_when_disabled = "[Domicile.GetMoveToTooltip( Province.Self )]"
+				using = tooltip_ne
+
+				button_icon = {
+					alwaystransparent = yes
+					parentanchor = center
+					size = { 30 30 }
+					texture = "gfx/interface/icons/flat_icons/move_camp.dds"
+				}
+			}
+			spacer = {
+				size = { 20 0 }
+			}
 		}
 
 		####################################

@@ -6,5 +6,5 @@ tags={
 	"Decisions"
 }
 name="Pax Romana Minority System"
-supported_version="1.12.5"
+supported_version="1.13.*"
 remote_file_id="3331215644"
