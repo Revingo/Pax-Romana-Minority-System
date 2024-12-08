@@ -1,0 +1,29 @@
+﻿current_culture_value = {
+	value = 0
+	if = {
+		limit = { exists = scope:county }
+		scope:county = {
+			every_in_list = {
+				variable = culture_minorities
+				limit = { this.var:culture = scope:councillor_liege.culture }
+
+				add = this.var:amount
+			}
+		}
+	}
+}
+
+current_faith_value = {
+	value = 0
+	if = {
+		limit = { exists = scope:county }
+		scope:county = {
+			every_in_list = {
+				variable = faith_minorities
+				limit = { this.var:faith = scope:councillor_liege.faith }
+	
+				add = this.var:amount
+			}
+		}
+	}
+}

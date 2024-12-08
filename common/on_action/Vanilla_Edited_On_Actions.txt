@@ -62,3 +62,15 @@ on_yearly_events = {
 		on_minority_events
 	}
 }
+
+on_county_culture_change = {
+	on_actions = {
+		on_county_culture_minorities_check
+	}
+}
+
+on_county_faith_change = {
+	on_actions = {
+		on_county_faith_minorities_check
+	}
+}

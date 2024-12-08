@@ -4,9 +4,17 @@
 	task_type = task_type_county
 	county_target = realm
 	ai_county_target = realm
-	task_progress = task_progress_infinite
-	restart_on_finish = yes
+	task_progress = task_progress_value
+	task_current_value = scope:councillor_liege.current_culture_value
+	task_max_value = 100
+	restart_on_finish = no
 	highlight_own_realm = yes
+
+	on_monthly_county = {
+		scope:county = {
+			
+		}
+	}
 	
 	effect_desc = {
 		desc = {

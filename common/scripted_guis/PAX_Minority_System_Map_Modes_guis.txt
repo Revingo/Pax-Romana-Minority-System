@@ -2,7 +2,7 @@
 	scope = culture
 
 	effect = {
-		set_global_variable = {
+		set_local_variable = {
 			name = culture_map_culture
 			value = root
 		}
@@ -10,140 +10,170 @@
 		every_county = {
 			if = {
 				limit = {
-					culture_is_already_in_list = {
-						CULTURE = global_var:culture_map_culture
-					}
-					culture_is_in_range = {
-						CULTURE = global_var:culture_map_culture
-						LOW_AMOUNT = 90
-						HIGH_AMOUNT = 101
-					}
+					#county = {
+						culture_is_already_in_list = {
+							CULTURE = culture:sicilian
+						}
+						culture_is_in_range = {
+							CULTURE = culture:sicilian
+							LOW_AMOUNT = 90
+							HIGH_AMOUNT = 101
+						}
+					#}
+					
 				}
 
 				set_color_from_title = title:d_PAX_color_100
 			}
 			else_if = {
 				limit = {
-					culture_is_already_in_list = {
-						CULTURE = global_var:culture_map_culture
-					}
-					culture_is_in_range = {
-						CULTURE = global_var:culture_map_culture
-						LOW_AMOUNT = 80
-						HIGH_AMOUNT = 90
-					}
+					#county = {
+						culture_is_already_in_list = {
+							CULTURE = culture:sicilian
+						}
+						culture_is_in_range = {
+							CULTURE = culture:sicilian
+							LOW_AMOUNT = 80
+							HIGH_AMOUNT = 90
+						}
+					#}
+					
 				}
 
 				set_color_from_title = title:d_PAX_color_90
 			}
 			else_if = {
 				limit = {
-					culture_is_already_in_list = {
-						CULTURE = global_var:culture_map_culture
-					}
-					culture_is_in_range = {
-						CULTURE = global_var:culture_map_culture
-						LOW_AMOUNT = 70
-						HIGH_AMOUNT = 80
-					}
+					#county = {
+						culture_is_already_in_list = {
+							CULTURE = culture:sicilian
+						}
+						culture_is_in_range = {
+							CULTURE = culture:sicilian
+							LOW_AMOUNT = 70
+							HIGH_AMOUNT = 80
+						}
+					#}
+					
 				}
 
 				set_color_from_title = title:d_PAX_color_80
 			}
 			else_if = {
 				limit = {
-					culture_is_already_in_list = {
-						CULTURE = global_var:culture_map_culture
-					}
-					culture_is_in_range = {
-						CULTURE = global_var:culture_map_culture
-						LOW_AMOUNT = 60
-						HIGH_AMOUNT = 70
-					}
+					#county = {
+						culture_is_already_in_list = {
+							CULTURE = culture:sicilian
+						}
+						culture_is_in_range = {
+							CULTURE = culture:sicilian
+							LOW_AMOUNT = 60
+							HIGH_AMOUNT = 70
+						}
+					#}
+					
 				}
 
 				set_color_from_title = title:d_PAX_color_70
 			}
 			else_if = {
 				limit = {
-					culture_is_already_in_list = {
-						CULTURE = global_var:culture_map_culture
-					}
-					culture_is_in_range = {
-						CULTURE = global_var:culture_map_culture
-						LOW_AMOUNT = 50
-						HIGH_AMOUNT = 60
-					}
+					#county = {
+						culture_is_already_in_list = {
+							CULTURE = culture:sicilian
+						}
+						culture_is_in_range = {
+							CULTURE = culture:sicilian
+							LOW_AMOUNT = 50
+							HIGH_AMOUNT = 60
+						}
+					#}
+					
 				}
 
 				set_color_from_title = title:d_PAX_color_60
 			}
 			else_if = {
 				limit = {
-					culture_is_already_in_list = {
-						CULTURE = global_var:culture_map_culture
-					}
-					culture_is_in_range = {
-						CULTURE = global_var:culture_map_culture
-						LOW_AMOUNT = 40
-						HIGH_AMOUNT = 50
-					}
+					#county = {
+						culture_is_already_in_list = {
+							CULTURE = culture:sicilian
+						}
+						culture_is_in_range = {
+							CULTURE = culture:sicilian
+							LOW_AMOUNT = 40
+							HIGH_AMOUNT = 50
+						}
+					#}
+					
 				}
 
 				set_color_from_title = title:d_PAX_color_50
 			}
 			else_if = {
 				limit = {
-					culture_is_already_in_list = {
-						CULTURE = global_var:culture_map_culture
-					}
-					culture_is_in_range = {
-						CULTURE = global_var:culture_map_culture
-						LOW_AMOUNT = 30
-						HIGH_AMOUNT = 40
-					}
+					#county = {
+						culture_is_already_in_list = {
+							CULTURE = culture:sicilian
+						}
+						culture_is_in_range = {
+							CULTURE = culture:sicilian
+							LOW_AMOUNT = 30
+							HIGH_AMOUNT = 40
+						}
+					#}
+					
 				}
 
 				set_color_from_title = title:d_PAX_color_40
 			}
 			else_if = {
 				limit = {
-					culture_is_already_in_list = {
-						CULTURE = global_var:culture_map_culture
-					}
-					culture_is_in_range = {
-						CULTURE = global_var:culture_map_culture
-						LOW_AMOUNT = 20
-						HIGH_AMOUNT = 30
-					}
+					#county = {
+						culture_is_already_in_list = {
+							CULTURE = culture:sicilian
+						}
+						culture_is_in_range = {
+							CULTURE = culture:sicilian
+							LOW_AMOUNT = 20
+							HIGH_AMOUNT = 30
+						}
+					#}
+					
 				}
 
 				set_color_from_title = title:d_PAX_color_30
 			}
 			else_if = {
 				limit = {
-					culture_is_already_in_list = {
-						CULTURE = global_var:culture_map_culture
-					}
-					culture_is_in_range = {
-						CULTURE = global_var:culture_map_culture
-						LOW_AMOUNT = 10
-						HIGH_AMOUNT = 20
-					}
+					#county = {
+						culture_is_already_in_list = {
+							CULTURE = culture:sicilian
+						}
+						culture_is_in_range = {
+							CULTURE = culture:sicilian
+							LOW_AMOUNT = 10
+							HIGH_AMOUNT = 20
+						}
+					#}
+					
 				}
 
 				set_color_from_title = title:d_PAX_color_20
 			}
 			else_if = {
 				limit = {
-					culture_is_already_in_list = {
-						CULTURE = global_var:culture_map_culture
-					}
-					culture_is_in_range = {
-						CULTURE = global_var:culture_map_culture
-						LOW_AMOUNT = 1
-						HIGH_AMOUNT = 10
-					}
+					#county = {
+						culture_is_already_in_list = {
+							CULTURE = culture:sicilian
+						}
+						culture_is_in_range = {
+							CULTURE = culture:sicilian
+							LOW_AMOUNT = 1
+							HIGH_AMOUNT = 10
+						}
+					#}
+					
 				}
 
 				set_color_from_title = title:d_PAX_color_10
@@ -155,7 +185,7 @@
 	}
 
 	is_shown = {
-		NOT = { has_global_variable = culture_map_culture }
+		NOT = { has_local_variable = culture_map_culture }
 	}
 }
 
@@ -163,11 +193,24 @@ culture_map_finish_scripted_gui = {
 	scope = culture
 
 	effect = {
-		remove_global_variable = culture_map_culture
+		remove_local_variable = culture_map_culture
 		
 	}
 	
 	is_shown = {
-		has_global_variable = culture_map_culture
+		has_local_variable = culture_map_culture
+	}
+}
+
+culture_map_mode_is_being_seen_scripted_gui = {
+	scope = culture
+
+	saved_scopes = { local_player }
+
+	is_valid = {
+		scope:local_player = {
+			has_variable = kCAFG_UI_culture_map_mode_viewed_culture
+			var:kCAFG_UI_culture_map_mode_viewed_culture = root
+		}
 	}
 }

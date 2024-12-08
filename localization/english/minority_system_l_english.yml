@@ -23,3 +23,6 @@
  minority_system_e.003.desc: "$faith_clash_desc$"
  minority_system_e.004.title: "$faith_conciliation$"
  minority_system_e.004.desc: "$faith_conciliation_desc$"
+
+task_conversion_VALUE_NAME: "[faith|E] Amount"
+task_promote_culture_VALUE_NAME: "[culture|E] Amount"

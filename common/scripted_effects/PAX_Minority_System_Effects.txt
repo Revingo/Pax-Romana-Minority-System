@@ -523,6 +523,7 @@ clever_faith_add = {
 change_dominant_culture = {
 	save_scope_as = county_dominant_to_change
 
+	# random_in_list should work better but for some reason sometimes it doesn't, so I'm using every_in_list instead even if it is way less efficient
 	every_in_list = {
 		variable = culture_minorities
 
@@ -631,6 +632,12 @@ change_dominant_culture = {
 	
 		remove_variable = clever_counter
 
+		# I've copied clever_culture_add here because I had to avoid recursion as it would end up in an infinite loop, but this is not a problem for neighboring counties
+
+		neighboring_counties_new_culture = {
+			CULTURE = scope:county_culture
+		}
+
 		#####################################################################################
 		# END OF CLEVER_CULTURE_ADD COPIED SECTION
 		#####################################################################################
@@ -643,6 +650,7 @@ change_dominant_culture = {
 change_dominant_faith = {
 	save_scope_as = county_dominant_to_change
 
+	# random_in_list should work better but for some reason sometimes it doesn't, so I'm using every_in_list instead even if it is way less efficient
 	every_in_list = {
 		variable = faith_minorities
 
@@ -750,6 +758,12 @@ change_dominant_faith = {
 		fix_faith_list = yes
 	
 		remove_variable = clever_counter
+
+		# I've copied clever_faith_add here because I had to avoid recursion as it would end up in an infinite loop, but this is not a problem for neighboring counties
+
+		neighboring_counties_new_faith = {
+			FAITH = scope:county_faith
+		}
 
 		#####################################################################################
 		# END OF CLEVER_FAITH_ADD COPIED SECTION

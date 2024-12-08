@@ -752,29 +752,25 @@ window = {
 								using = Font_Size_Small
 								default_format = "#E"
 							}
+							spacer = {
+								layoutpolicy_horizontal = expanding
+							}
 
-							button_tertiary = {
+							widget = {
+								size = { 20 20 }
 								name = "view_culture_map"
 								visible = "[And(CanChangeMapMode, GetScriptedGui('culture_map_start_scripted_gui').IsShown(GuiScope.SetRoot(Scope.Story.MakeScope.Var('culture').Culture).End))]"
-								#parentanchor = hcenter
-
-								size = { 20 20 }
-								onclick = "[SetMapMode('culture_map_mode')]"
-								onclick = "[GetScriptedGui('culture_map_start_scripted_gui').Execute(GuiScope.SetRoot(Scope.Story.MakeScope.Var('culture').Culture).End)]"
-								#down = "[And( GetScriptedGui('highlight_special_buildings_map').IsShown(GuiScope.End), IsMapMode('custom_mapmode') )]"
-								#enabled = "[GetScriptedGui('highlight_special_buildings_map').IsValid(GuiScope.End)]"
-
-								background = {
-									#margin = { -5 -5 }
-									fittype = centercrop
-									alpha = 1.0
+								button_icon = {
 									texture = "gfx/interface/icons/minority_system/minority_system_map_mode_icon.dds"
+									size = { 100% 100% }
+									onclick = "[SetMapMode('culture_map_mode')]"
+									onclick = "[GetScriptedGui('culture_map_start_scripted_gui').Execute(GuiScope.SetRoot(Scope.Story.MakeScope.Var('culture').Culture).End)]"
 								}
-
-								#text = "COURT_POSITION_CATEGORY_SPECIAL_NAME"
-
-								#tooltip = "single_combat.0031.desc.sc_defender.butchery"
 								using = tooltip_ws
+							}
+
+							spacer = {
+								size = { 50 0 }
 							}
 
 							spacer = {

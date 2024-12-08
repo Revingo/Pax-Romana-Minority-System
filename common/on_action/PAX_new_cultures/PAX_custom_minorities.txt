@@ -22,5 +22,8 @@ on_custom_faith_culture_minority_add = {
 		#		AMOUNT = 32.256
 		#	 }
 		# }
+		#
+		#
+		# DO NOT WORRY ABOUT EXCEEDING 100% IN TOTAL, THE MOD WILL AUTOMATICALLY ADJUST THE VALUES TO FIT THE 100% LIMIT
 	}
 }
