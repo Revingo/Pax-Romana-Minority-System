@@ -1,5 +1,5 @@
 ﻿culture_map_mode = {
-	color_mode = counties
+	color_mode = baronies
 	small_map_names = counties
 	large_map_names = cultures
 	selection = cultures

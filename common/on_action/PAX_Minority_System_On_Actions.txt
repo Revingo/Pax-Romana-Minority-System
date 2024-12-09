@@ -1048,7 +1048,7 @@ on_minority_system_culture_conversion = {
 		}
 		if = {
 			limit = {
-				has_game_rule = significantly_faster_culture_conversion_speed
+				has_game_rule = faster_culture_conversion_speed 
 			}
 			change_local_variable = {
 				name = temp_conversion_amount
@@ -1057,7 +1057,7 @@ on_minority_system_culture_conversion = {
 		}
 		if = {
 			limit = {
-				has_game_rule = faster_culture_conversion_speed
+				has_game_rule = significantly_faster_culture_conversion_speed
 			}
 			change_local_variable = {
 				name = temp_conversion_amount

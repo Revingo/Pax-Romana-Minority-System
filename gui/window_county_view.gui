@@ -753,24 +753,52 @@ window = {
 								default_format = "#E"
 							}
 							spacer = {
-								layoutpolicy_horizontal = expanding
+								size = { 20 0 }
 							}
 
 							widget = {
 								size = { 20 20 }
 								name = "view_culture_map"
-								visible = "[And(CanChangeMapMode, GetScriptedGui('culture_map_start_scripted_gui').IsShown(GuiScope.SetRoot(Scope.Story.MakeScope.Var('culture').Culture).End))]"
-								button_icon = {
-									texture = "gfx/interface/icons/minority_system/minority_system_map_mode_icon.dds"
-									size = { 100% 100% }
-									onclick = "[SetMapMode('culture_map_mode')]"
-									onclick = "[GetScriptedGui('culture_map_start_scripted_gui').Execute(GuiScope.SetRoot(Scope.Story.MakeScope.Var('culture').Culture).End)]"
-								}
-								using = tooltip_ws
-							}
+								
 
-							spacer = {
-								size = { 50 0 }
+								#visible = "[Not(IsObserver)]"
+
+        						state = {
+   						        	name = "PAX_MINORITY_update_display"
+
+            						on_finish = "[GetScriptedGui('culture_map_start_scripted_gui').Execute(GuiScope.SetRoot(Scope.Story.MakeScope.Var('culture').Culture.MakeScope).AddScope('local_player', GetPlayer.MakeScope).End)]"
+        						}	
+
+        						button_icon = {
+            						name = "PAX_MINORITY_culture_map_mode_button_on"
+            						texture = "gfx/interface/icons/minority_system/minority_system_map_mode_icon_C.dds"
+            						size = { 100% 100% }
+
+            						visible = "[Not(IsMapMode('culture_map_mode'))]"
+            
+            						onclick = "[SetMapMode('culture_map_mode')]"
+            						onclick = "[GetScriptedGui('culture_map_start_scripted_gui').Execute(GuiScope.SetRoot(Scope.Story.MakeScope.Var('culture').Culture.MakeScope).AddScope('local_player', GetPlayer.MakeScope).End)]"
+									#onclick = "[PdxGuiWidget.TriggerAnimation('PAX_MINORITY_update_display')]"
+
+            						#tooltip = "kCAFG_CULTURE_OPEN_MAPMODE_TOOLTIP_TITLE"
+            						using = tooltip_nw
+        						}
+
+        						button_icon = {
+            						name = "PAX_MINORITY_culture_map_mode_button_off"
+            						texture = "gfx/interface/icons/minority_system/minority_system_map_mode_icon_C.dds"
+            						size = { 100% 100% }
+
+            						visible = "[IsMapMode('culture_map_mode')]"
+            
+            						onclick = "[SetMapMode('realms')]"
+									
+            
+            						#tooltip = "kCAFG_CULTURES_OPEN_MAPMODE_TOOLTIP_TITLE"
+            						using = tooltip_nw
+        						}
+
+       							#block "overrides" {}
 							}
 
 							spacer = {

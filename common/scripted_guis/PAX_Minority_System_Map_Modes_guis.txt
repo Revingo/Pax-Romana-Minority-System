@@ -1,216 +1,244 @@
 ﻿culture_map_start_scripted_gui = {
 	scope = culture
 
-	effect = {
-		set_local_variable = {
-			name = culture_map_culture
-			value = root
-		}
-
-		every_county = {
-			if = {
-				limit = {
-					#county = {
-						culture_is_already_in_list = {
-							CULTURE = culture:sicilian
-						}
-						culture_is_in_range = {
-							CULTURE = culture:sicilian
-							LOW_AMOUNT = 90
-							HIGH_AMOUNT = 101
-						}
-					#}
-					
-				}
-
-				set_color_from_title = title:d_PAX_color_100
-			}
-			else_if = {
-				limit = {
-					#county = {
-						culture_is_already_in_list = {
-							CULTURE = culture:sicilian
-						}
-						culture_is_in_range = {
-							CULTURE = culture:sicilian
-							LOW_AMOUNT = 80
-							HIGH_AMOUNT = 90
-						}
-					#}
-					
-				}
-
-				set_color_from_title = title:d_PAX_color_90
-			}
-			else_if = {
-				limit = {
-					#county = {
-						culture_is_already_in_list = {
-							CULTURE = culture:sicilian
-						}
-						culture_is_in_range = {
-							CULTURE = culture:sicilian
-							LOW_AMOUNT = 70
-							HIGH_AMOUNT = 80
-						}
-					#}
-					
-				}
-
-				set_color_from_title = title:d_PAX_color_80
-			}
-			else_if = {
-				limit = {
-					#county = {
-						culture_is_already_in_list = {
-							CULTURE = culture:sicilian
-						}
-						culture_is_in_range = {
-							CULTURE = culture:sicilian
-							LOW_AMOUNT = 60
-							HIGH_AMOUNT = 70
-						}
-					#}
-					
-				}
-
-				set_color_from_title = title:d_PAX_color_70
-			}
-			else_if = {
-				limit = {
-					#county = {
-						culture_is_already_in_list = {
-							CULTURE = culture:sicilian
-						}
-						culture_is_in_range = {
-							CULTURE = culture:sicilian
-							LOW_AMOUNT = 50
-							HIGH_AMOUNT = 60
-						}
-					#}
-					
-				}
-
-				set_color_from_title = title:d_PAX_color_60
-			}
-			else_if = {
-				limit = {
-					#county = {
-						culture_is_already_in_list = {
-							CULTURE = culture:sicilian
-						}
-						culture_is_in_range = {
-							CULTURE = culture:sicilian
-							LOW_AMOUNT = 40
-							HIGH_AMOUNT = 50
-						}
-					#}
-					
-				}
-
-				set_color_from_title = title:d_PAX_color_50
-			}
-			else_if = {
-				limit = {
-					#county = {
-						culture_is_already_in_list = {
-							CULTURE = culture:sicilian
-						}
-						culture_is_in_range = {
-							CULTURE = culture:sicilian
-							LOW_AMOUNT = 30
-							HIGH_AMOUNT = 40
-						}
-					#}
-					
-				}
-
-				set_color_from_title = title:d_PAX_color_40
-			}
-			else_if = {
-				limit = {
-					#county = {
-						culture_is_already_in_list = {
-							CULTURE = culture:sicilian
-						}
-						culture_is_in_range = {
-							CULTURE = culture:sicilian
-							LOW_AMOUNT = 20
-							HIGH_AMOUNT = 30
-						}
-					#}
-					
-				}
-
-				set_color_from_title = title:d_PAX_color_30
-			}
-			else_if = {
-				limit = {
-					#county = {
-						culture_is_already_in_list = {
-							CULTURE = culture:sicilian
-						}
-						culture_is_in_range = {
-							CULTURE = culture:sicilian
-							LOW_AMOUNT = 10
-							HIGH_AMOUNT = 20
-						}
-					#}
-					
-				}
-
-				set_color_from_title = title:d_PAX_color_20
-			}
-			else_if = {
-				limit = {
-					#county = {
-						culture_is_already_in_list = {
-							CULTURE = culture:sicilian
-						}
-						culture_is_in_range = {
-							CULTURE = culture:sicilian
-							LOW_AMOUNT = 1
-							HIGH_AMOUNT = 10
-						}
-					#}
-					
-				}
-
-				set_color_from_title = title:d_PAX_color_10
-			}
-			else = {
-				set_color_from_title = title:d_PAX_color_0
-			}
-		}
-	}
-
-	is_shown = {
-		NOT = { has_local_variable = culture_map_culture }
-	}
-}
-
-culture_map_finish_scripted_gui = {
-	scope = culture
+	saved_scopes = { local_player }
 
 	effect = {
-		remove_local_variable = culture_map_culture
+		if = {
+			limit = { 
+				exists = scope:local_player
+				NOT = {
+					is_target_in_global_variable_list = {
+						name = PAX_MINORITY_UI_map_mode_changing
+						target = scope:local_player
+					}
+				}
+			}
+
+			add_to_global_variable_list = {
+				name = PAX_MINORITY_UI_map_mode_changing
+				target = scope:local_player
+			}
+			add_to_global_variable_list = {
+				name = PAX_MINORITY_UI_viewing_culture_map_mode
+				target = scope:local_player
+			}
+
+			scope:local_player = {
+				set_variable = {
+					name = PAX_MINORITY_culture_map_mode_viewed_culture
+					value = root
+				}
+			}
+			every_barony = {
+				if = {
+					limit = {
+						county = {
+							culture_is_already_in_list = {
+								CULTURE = root
+							}
+							culture_is_in_range = {
+								CULTURE = root
+								LOW_AMOUNT = 90
+								HIGH_AMOUNT = 101
+							}
+						}
+						
+					}
+	
+					set_color_from_title = title:d_PAX_color_100
+				}
+				else_if = {
+					limit = {
+						county = {
+							culture_is_already_in_list = {
+								CULTURE = root
+							}
+							culture_is_in_range = {
+								CULTURE = root
+								LOW_AMOUNT = 80
+								HIGH_AMOUNT = 90
+							}
+						}
+						
+					}
+	
+					set_color_from_title = title:d_PAX_color_90
+				}
+				else_if = {
+					limit = {
+						county = {
+							culture_is_already_in_list = {
+								CULTURE = root
+							}
+							culture_is_in_range = {
+								CULTURE = root
+								LOW_AMOUNT = 70
+								HIGH_AMOUNT = 80
+							}
+						}
+						
+					}
+	
+					set_color_from_title = title:d_PAX_color_80
+				}
+				else_if = {
+					limit = {
+						county = {
+							culture_is_already_in_list = {
+								CULTURE = root
+							}
+							culture_is_in_range = {
+								CULTURE = root
+								LOW_AMOUNT = 60
+								HIGH_AMOUNT = 70
+							}
+						}
+						
+					}
+	
+					set_color_from_title = title:d_PAX_color_70
+				}
+				else_if = {
+					limit = {
+						county = {
+							culture_is_already_in_list = {
+								CULTURE = root
+							}
+							culture_is_in_range = {
+								CULTURE = root
+								LOW_AMOUNT = 50
+								HIGH_AMOUNT = 60
+							}
+						}
+						
+					}
+	
+					set_color_from_title = title:d_PAX_color_60
+				}
+				else_if = {
+					limit = {
+						county = {
+							culture_is_already_in_list = {
+								CULTURE = root
+							}
+							culture_is_in_range = {
+								CULTURE = root
+								LOW_AMOUNT = 40
+								HIGH_AMOUNT = 50
+							}
+						}
+						
+					}
+	
+					set_color_from_title = title:d_PAX_color_50
+				}
+				else_if = {
+					limit = {
+						county = {
+							culture_is_already_in_list = {
+								CULTURE = root
+							}
+							culture_is_in_range = {
+								CULTURE = root
+								LOW_AMOUNT = 30
+								HIGH_AMOUNT = 40
+							}
+						}
+						
+					}
+	
+					set_color_from_title = title:d_PAX_color_40
+				}
+				else_if = {
+					limit = {
+						county = {
+							culture_is_already_in_list = {
+								CULTURE = root
+							}
+							culture_is_in_range = {
+								CULTURE = root
+								LOW_AMOUNT = 20
+								HIGH_AMOUNT = 30
+							}
+						}
+						
+					}
+	
+					set_color_from_title = title:d_PAX_color_30
+				}
+				else_if = {
+					limit = {
+						county = {
+							culture_is_already_in_list = {
+								CULTURE = root
+							}
+							culture_is_in_range = {
+								CULTURE = root
+								LOW_AMOUNT = 10
+								HIGH_AMOUNT = 20
+							}
+						}
+						
+					}
+	
+					set_color_from_title = title:d_PAX_color_20
+				}
+				else_if = {
+					limit = {
+						county = {
+							culture_is_already_in_list = {
+								CULTURE = root
+							}
+							culture_is_in_range = {
+								CULTURE = root
+								LOW_AMOUNT = 1
+								HIGH_AMOUNT = 10
+							}
+						}
+						
+					}
+	
+					set_color_from_title = title:d_PAX_color_10
+				}
+				else = {
+					set_color_from_title = title:d_PAX_color_0
+				}
+			}
+
+			remove_list_global_variable = {
+				name = PAX_MINORITY_UI_map_mode_changing
+				target = scope:local_player
+			}
+		}
 		
 	}
-	
+
 	is_shown = {
-		has_local_variable = culture_map_culture
+		is_target_in_global_variable_list = {
+			name = PAX_MINORITY_UI_viewing_culture_map_mode
+			target = scope:local_player
+		}
+	}
+	is_valid = {
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = PAX_MINORITY_UI_map_mode_changing
+				target = scope:local_player
+			}
+		}
 	}
 }
 
-culture_map_mode_is_being_seen_scripted_gui = {
+culture_map_mode_player_is_viewing_culture = {
 	scope = culture
 
 	saved_scopes = { local_player }
 
 	is_valid = {
 		scope:local_player = {
-			has_variable = kCAFG_UI_culture_map_mode_viewed_culture
-			var:kCAFG_UI_culture_map_mode_viewed_culture = root
+			has_variable = PAX_MINORITY_culture_map_mode_viewed_culture
+			var:PAX_MINORITY_culture_map_mode_viewed_culture = root
 		}
 	}
 }
