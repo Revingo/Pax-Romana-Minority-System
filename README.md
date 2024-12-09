@@ -15,7 +15,7 @@ In general, this system makes for a more dynamic and immersive experience than t
 - mods that edit the "window_county_view.gui" file
 - mods that edit the court chaplain or the steward tasks
   Any other mod should be 100% compatible!
-  ALSO: If you can't convert the a county, then this is probably due to incompatibility with one of your mods, check your mod list!
+  ALSO: If you can't convert a county, then this is probably due to incompatibility with one of your mods, check your mod list!
 
 ### Known Incompatible Mods:
 
