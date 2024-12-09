@@ -759,15 +759,7 @@ window = {
 							widget = {
 								size = { 20 20 }
 								name = "view_culture_map"
-								
-
-								#visible = "[Not(IsObserver)]"
-
-        						state = {
-   						        	name = "PAX_MINORITY_update_display"
-
-            						on_finish = "[GetScriptedGui('culture_map_start_scripted_gui').Execute(GuiScope.SetRoot(Scope.Story.MakeScope.Var('culture').Culture.MakeScope).AddScope('local_player', GetPlayer.MakeScope).End)]"
-        						}	
+								visible = "[Not(IsObserver)]"
 
         						button_icon = {
             						name = "PAX_MINORITY_culture_map_mode_button_on"
@@ -778,9 +770,8 @@ window = {
             
             						onclick = "[SetMapMode('culture_map_mode')]"
             						onclick = "[GetScriptedGui('culture_map_start_scripted_gui').Execute(GuiScope.SetRoot(Scope.Story.MakeScope.Var('culture').Culture.MakeScope).AddScope('local_player', GetPlayer.MakeScope).End)]"
-									#onclick = "[PdxGuiWidget.TriggerAnimation('PAX_MINORITY_update_display')]"
 
-            						#tooltip = "kCAFG_CULTURE_OPEN_MAPMODE_TOOLTIP_TITLE"
+            						tooltip = "PAX_Minority_system_SHOW_CULTURE_MAPMODE_ON"
             						using = tooltip_nw
         						}
 
@@ -794,11 +785,9 @@ window = {
             						onclick = "[SetMapMode('realms')]"
 									
             
-            						#tooltip = "kCAFG_CULTURES_OPEN_MAPMODE_TOOLTIP_TITLE"
+            						tooltip = "PAX_Minority_system_SHOW_MAPMODE_OFF"
             						using = tooltip_nw
         						}
-
-       							#block "overrides" {}
 							}
 
 							spacer = {
@@ -980,6 +969,45 @@ window = {
 									default_format = "#E"
 								}
 							#}
+
+							spacer = {
+								size = { 20 0 }
+							}
+
+							widget = {
+								size = { 20 20 }
+								name = "view_faith_map"
+								visible = "[Not(IsObserver)]"
+
+        						button_icon = {
+            						name = "PAX_MINORITY_faith_map_mode_button_on"
+            						texture = "gfx/interface/icons/minority_system/minority_system_map_mode_icon_F.dds"
+            						size = { 100% 100% }
+
+            						visible = "[Not(IsMapMode('faith_map_mode'))]"
+            
+            						onclick = "[SetMapMode('faith_map_mode')]"
+            						onclick = "[GetScriptedGui('faith_map_start_scripted_gui').Execute(GuiScope.SetRoot(Scope.Story.MakeScope.Var('faith').Faith.MakeScope).AddScope('local_player', GetPlayer.MakeScope).End)]"
+
+            						tooltip = "PAX_Minority_system_SHOW_FAITH_MAPMODE_ON"
+            						using = tooltip_nw
+        						}
+
+        						button_icon = {
+            						name = "PAX_MINORITY_faith_map_mode_button_off"
+            						texture = "gfx/interface/icons/minority_system/minority_system_map_mode_icon_F.dds"
+            						size = { 100% 100% }
+
+            						visible = "[IsMapMode('faith_map_mode')]"
+            
+            						onclick = "[SetMapMode('realms')]"
+									
+            
+            						tooltip = "PAX_Minority_system_SHOW_MAPMODE_OFF"
+            						using = tooltip_nw
+        						}
+							}
+
 							spacer = {
 								layoutpolicy_horizontal = expanding
 							}

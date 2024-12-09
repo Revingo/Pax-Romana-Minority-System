@@ -49,3 +49,15 @@ culture_is_in_range = {
 		#}
 	}
 }
+
+faith_is_in_range = {
+	any_in_list = {
+		variable = faith_minorities
+
+		this.var:faith = $FAITH$
+		#AND = {
+			this.var:amount > $LOW_AMOUNT$
+			this.var:amount < $HIGH_AMOUNT$
+		#}
+	}
+}

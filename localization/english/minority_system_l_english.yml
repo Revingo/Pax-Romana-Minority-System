@@ -26,3 +26,7 @@
 
 task_conversion_VALUE_NAME: "[faith|E] Amount"
 task_promote_culture_VALUE_NAME: "[culture|E] Amount"
+
+PAX_Minority_system_SHOW_CULTURE_MAPMODE_ON: "Show [culture|E]'s Map"
+PAX_Minority_system_SHOW_FAITH_MAPMODE_ON: "Show [faith|E]'s Map"
+PAX_Minority_system_SHOW_MAPMODE_OFF: "Show [realms|E]' Map"
